@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>ÖBB Link Creator</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -28,7 +28,7 @@
         oninput="takeOverID('select-departure-station','input-departure-station-id')"
       ></select>
       <label for="name">Station ID</label>
-      <input type="text" id="input-departure-station-id" />
+      <input type="text" id="input-departure-station-id" oninput="generateURL()" />
     </fieldset>
 
     <!-- Destination Station -->
@@ -53,28 +53,28 @@
         oninput="takeOverID('select-destination-station', 'input-destination-station-id')"
       ></select>
       <label for="name">Station ID</label>
-      <input type="text" id="input-destination-station-id" />
+      <input type="text" id="input-destination-station-id" oninput="generateURL()" />
     </fieldset>
 
     <!-- Settings -->
     <fieldset>
       <legend>Additional time</legend>
-      <input type="number" id="input-additional-time" value="5" />
+      <input type="number" id="input-additional-time" value="5" onchange="generateURL()" />
     </fieldset>
 
     <fieldset>
       <legend>Number of displayed journeys</legend>
-      <input type="number" id="input-number-of-journeys" value="8" />
+      <input type="number" id="input-number-of-journeys" value="8" onchange="generateURL()" />
     </fieldset>
 
     <fieldset>
       <legend>Board type</legend>
       <div>
-        <input type="radio" id="departure" name="board-type" value="departure" checked />
+        <input type="radio" id="departure" name="board-type" value="departure" onchange="generateURL()" checked />
         <label for="departure">Departure</label>
       </div>
       <div>
-        <input type="radio" id="arrival" name="board-type" value="arrival" />
+        <input type="radio" id="arrival" name="board-type" value="arrival" onchange="generateURL()" />
         <label for="arrival">Arrival</label>
       </div>
     </fieldset>
@@ -83,61 +83,60 @@
     <fieldset>
       <legend>Train selection</legend>
       <div>
-        <input type="checkbox" id="products-filter-7" name="products-filter-7" checked />
+        <input type="checkbox" id="products-filter-7" name="products-filter-7" onchange="generateURL()" checked />
         <label for="products-filter-7">S-Bahn</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-8" name="products-filter-8" checked />
+        <input type="checkbox" id="products-filter-8" name="products-filter-8" onchange="generateURL()" checked />
         <label for="products-filter-2">REX</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-0" name="products-filter-0" checked />
+        <input type="checkbox" id="products-filter-0" name="products-filter-0" onchange="generateURL()" checked />
         <label for="products-filter-0">RGJ</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-12" name="products-filter-12" checked />
+        <input type="checkbox" id="products-filter-12" name="products-filter-12" onchange="generateURL()" checked />
         <label for="products-filter-12">RJ / RJX</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-10" name="products-filter-10" checked />
+        <input type="checkbox" id="products-filter-10" name="products-filter-10" onchange="generateURL()" checked />
         <label for="products-filter-10">IC / EC</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-9" name="products-filter-9" checked />
+        <input type="checkbox" id="products-filter-9" name="products-filter-9" onchange="generateURL()" checked />
         <label for="products-filter-9">NJ</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-4" name="products-filter-4" checked />
+        <input type="checkbox" id="products-filter-4" name="products-filter-4" onchange="generateURL()" checked />
         <label for="products-filter-4">U</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-3" name="products-filter-3" checked />
+        <input type="checkbox" id="products-filter-3" name="products-filter-3" onchange="generateURL()" checked />
         <label for="products-filter-3">Tram</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-2" name="products-filter-2" />
+        <input type="checkbox" id="products-filter-2" name="products-filter-2" onchange="generateURL()" />
         <label for="products-filter-2">Regional Bus</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-6" name="products-filter-6" checked />
+        <input type="checkbox" id="products-filter-6" name="products-filter-6" onchange="generateURL()" checked />
         <label for="products-filter-6">City Bus</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-1" name="products-filter-1" checked />
+        <input type="checkbox" id="products-filter-1" name="products-filter-1" onchange="generateURL()" checked />
         <label for="products-filter-1">?</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-5" name="products-filter-5" checked />
+        <input type="checkbox" id="products-filter-5" name="products-filter-5" onchange="generateURL()" checked />
         <label for="products-filter-5">?</label>
       </div>
       <div>
-        <input type="checkbox" id="products-filter-11" name="products-filter-11" />
+        <input type="checkbox" id="products-filter-11" name="products-filter-11" onchange="generateURL()" />
         <label for="products-filter-11">?</label>
       </div>
     </fieldset>
 
     <!-- Output -->
-    <input type="button" onclick="generateURL()" value="generate URL" />
     <fieldset>
       <legend>URL</legend>
       <input type="text" readonly id="input-url" />

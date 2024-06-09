@@ -132,6 +132,8 @@ function takeOverID(selectStation, inputStationID) {
 
   // console.log(ELEM_SELECT_STATION.value);
   ELEM_INPUT_STATION_ID.value = ELEM_SELECT_STATION.value;
+
+  generateURL();
 }
 
 function generateURL() {
@@ -183,7 +185,7 @@ function generateURL() {
   }
 
   const urlScotty =
-    "https://fahrplan.oebb.at/bin/stboard.exe/dn?L=vs_scotty.vs_liveticker&boardType=dep&tickerID=dep&start=yes&eqstops=true" +
+    "https://fahrplan.oebb.at/bin/stboard.exe/dn?L=vs_scotty.vs_liveticker&start=yes&eqstops=true" +
     "&evaId=" +
     urlParamDepartureStation +
     "&dirInput=" +
@@ -192,6 +194,10 @@ function generateURL() {
     urlParamNumberJourneys +
     "&maxJourneys=" +
     urlParamNumberJourneys +
+    "&boardType=" +
+    urlParamBoardType +
+    "&tickerID=" +
+    urlParamBoardType +
     "&additionalTime=" +
     urlParamAdditionalTime +
     "&productsFilter=" +
