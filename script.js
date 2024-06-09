@@ -44,30 +44,37 @@ const ELEM_CHECKBOX_PRODUCTS_FILTER_LIST = [
 ];
 
 const ELEM_INPUT_URL = document.getElementById("input-url");
+const ELEM_IFRAME_PREVIEW = document.getElementById("iframe-preview");
 const ELEM_ANCHOR_URL = document.getElementById("anchor-url");
 
 let outputString;
 
 let busy = false;
+let queue = false;
+
+window.addEventListener("load", () => {
+  // searchStation("input-departure-station-search", "select-departure-station");
+});
 
 function searchStation(inputStationSearch, selectStation) {
-  if (!busy) {
+  const searchText = document.getElementById(inputStationSearch).value;
+  if (searchText.length < 2) return;
+
+  if (busy) {
+    queue = true;
+  } else {
+    clearList(selectStation);
+    addText(selectStation, "searching...");
     busy = true;
-    const searchText = document.getElementById(inputStationSearch).value;
-    //console.log(searchText);
     const searchTextMod = searchText.replace(" ", "%20");
-    // console.log(searchTextMod);
     const searchURL =
-      "https://fahrplan.oebb.at/bin/ajax-getstop.exe/en?REQ0JourneyStopsS0A=&REQ0JourneyStopsB=12&S=" +
+      "https://fahrplan.oebb.at/bin/ajax-getstop.exe/en?REQ0JourneyStopsS0A=&REQ0JourneyStopsB=20&S=" +
       searchTextMod +
       "?&js=true&";
-    //console.log(searchURL);
-
-    const abortController = new AbortController();
-    const signal = abortController.signal;
 
     fetch(searchURL)
       .then(function (response) {
+        console.log("then response: " + response);
         switch (response.status) {
           // status "OK"
           case 200:
@@ -77,42 +84,40 @@ function searchStation(inputStationSearch, selectStation) {
             throw response;
         }
       })
-      .then(function (template) {
-        // console.log(template);
-        // ELEM_OUTPUT.innerHTML = template;
-        outputString = template;
-        //   console.log(template);
-        template = template.replace("SLs.sls=", "");
-        //   console.log(template);
-        template = template.replace(";SLs.showSuggestion();", "");
-        //   console.log(template);
+      .then(function (data) {
+        // console.log(data);
+        outputString = data;
+        data = data.replace("SLs.sls=", "");
+        data = data.replace(";SLs.showSuggestion();", "");
 
-        let outputJSON = JSON.parse(template);
-        // console.log(outputJSON);
+        let outputJSON = JSON.parse(data);
+
         clearList(selectStation);
         fillList(selectStation, outputJSON);
+
         busy = false;
+        if (queue) {
+          queue = false;
+          searchStation(inputStationSearch, selectStation);
+        }
       })
       .catch(function (response) {
         // "Not Found"
-        // console.log(response.statusText);
-        console.log("ERROR: " + response.statusText);
+        console.log("catch response: " + response);
+        clearList(selectStation);
+        addText(selectStation, response);
         busy = false;
       });
   }
-  // ELEM_DEPARTURE_STATION_SEARCH.addEventListener("click", () => {
-  //   abortController.abort();
-  // });
 }
+
 function fillList(selectStation, outputJSON) {
   const ELEM_SELECT_STATION = document.getElementById(selectStation);
   const STATIONS_LIST = outputJSON.suggestions;
   for (let i = 0; i < STATIONS_LIST.length; i++) {
-    // console.log(STATIONS_LIST[i]);
     const newOption = document.createElement("option");
     const optionText = document.createTextNode(STATIONS_LIST[i].value);
     const extId = STATIONS_LIST[i].extId.slice(2);
-    // console.log(extId);
     newOption.appendChild(optionText);
     newOption.setAttribute("value", extId);
     ELEM_SELECT_STATION.appendChild(newOption);
@@ -126,11 +131,17 @@ function clearList(selectStation) {
   }
 }
 
+function addText(selectStation, text) {
+  const ELEM_SELECT_STATION = document.getElementById(selectStation);
+  const newOption = document.createElement("option");
+  const optionText = document.createTextNode(text);
+  newOption.appendChild(optionText);
+  ELEM_SELECT_STATION.appendChild(newOption);
+}
+
 function takeOverID(selectStation, inputStationID) {
   const ELEM_SELECT_STATION = document.getElementById(selectStation);
   const ELEM_INPUT_STATION_ID = document.getElementById(inputStationID);
-
-  // console.log(ELEM_SELECT_STATION.value);
   ELEM_INPUT_STATION_ID.value = ELEM_SELECT_STATION.value;
 
   generateURL();
@@ -204,5 +215,16 @@ function generateURL() {
     urlParamTrainSelection;
 
   ELEM_INPUT_URL.value = urlScotty;
-  ELEM_ANCHOR_URL.href = urlScotty;
+  ELEM_IFRAME_PREVIEW.src = urlScotty;
+  // ELEM_ANCHOR_URL.href = urlScotty;
+}
+
+function copyURLToClipboard() {
+  const copyContent = async () => {
+    try {
+      await navigator.clipboard.writeText(ELEM_INPUT_URL.value);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
 }
