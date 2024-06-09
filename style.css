@@ -1,4 +1,142 @@
-body{
-    background-color: #000000ce;
-    color: white;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000000ce;
+  color: white;
+  font-size: 1.1rem;
+}
+
+textarea,
+input {
+  font-size: 1.1rem;
+}
+
+select {
+  font-size: 1.1rem;
+}
+
+label {
+  font-size: 1.1rem;
+}
+
+a {
+  color: white;
+}
+
+svg {
+  width: 32px;
+  height: 32px;
+}
+
+fieldset {
+  margin-top: 0.5rem;
+}
+
+p {
+  margin: 0;
+}
+
+.fieldset-products-filter label {
+}
+
+.fieldset-products-filter input {
+  transform: scale(1.7);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.7rem;
+}
+
+.div-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 0.1fr 0.1fr 0.1fr fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "fieldset-departure fieldset-destination"
+    "fieldset-additional-time fieldset-products-filter"
+    "fieldset-num-journeys fieldset-products-filter"
+    "fieldset-board-type fieldset-products-filter"
+    "fieldset-url fieldset-url"
+    "fieldset-preview fieldset-preview";
+}
+
+.fieldset-departure {
+  grid-area: fieldset-departure;
+  display: flexbox;
+}
+
+.fieldset-destination {
+  grid-area: fieldset-destination;
+  display: flexbox;
+}
+
+.fieldset-products-filter {
+  grid-area: fieldset-products-filter;
+}
+
+.fieldset-additional-time {
+  grid-area: fieldset-additional-time;
+}
+
+.fieldset-board-type {
+  grid-area: fieldset-board-type;
+}
+
+.fieldset-num-journeys {
+  grid-area: fieldset-num-journeys;
+}
+
+.fieldset-url {
+  grid-area: fieldset-url;
+}
+
+.fieldset-preview {
+  grid-area: fieldset-preview;
+}
+
+textarea {
+  width: 100%;
+  height: 6rem;
+}
+
+#input-departure-station-search,
+#input-destination-station-search,
+#select-departure-station,
+#select-destination-station,
+#input-additional-time,
+#input-number-of-journeys,
+.div-id {
+  width: 100%;
+}
+
+#input-departure-station-id,
+#input-destination-station-id {
+  width: auto;
+}
+
+iframe {
+  width: 100%;
+  height: 15rem;
+}
+
+.div-inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 40em) {
+  .div-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 0.1fr 0.1fr 0.1fr fr 1fr;
+    grid-template-areas:
+      "fieldset-departure fieldset-departure"
+      "fieldset-destination fieldset-destination"
+      "fieldset-additional-time fieldset-products-filter"
+      "fieldset-num-journeys fieldset-products-filter"
+      "fieldset-board-type fieldset-products-filter"
+      "fieldset-url fieldset-url"
+      "fieldset-preview fieldset-preview";
+  }
 }
