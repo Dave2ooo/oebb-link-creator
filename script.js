@@ -78,19 +78,23 @@ function searchStation(inputStationSearch, selectStation) {
         switch (response.status) {
           // status "OK"
           case 200:
-            return response.text();
+            // return response.text();
+            return response.arrayBuffer();
           // status "Not Found"
           case 404:
             throw response;
         }
       })
       .then(function (data) {
-        // console.log(data);
-        outputString = data;
+        let decoder = new TextDecoder("iso-8859-1");
+        data = decoder.decode(data);
+
+        // console.log("this is my text: " + data);
+
         data = data.replace("SLs.sls=", "");
         data = data.replace(";SLs.showSuggestion();", "");
 
-        let outputJSON = JSON.parse(data);
+        let outputJSON = JSON.parse(data.toString("utf8"));
 
         clearList(selectStation);
         fillList(selectStation, outputJSON);
