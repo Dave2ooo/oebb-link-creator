@@ -2,6 +2,11 @@
 
 // https://fahrplan.oebb.at/bin/query.exe/en?
 
+// import MiniSearch from "minisearch";
+// const MiniSearch = require("minisearch");
+
+const ELEM_TOGGLE_CHECKBOX = document.querySelector(".toggle-checkbox");
+
 const ELEM_DEPARTURE_STATION_SEARCH = document.getElementById("input-departure-station-search");
 
 const ELEM_INPUT_DESTINATION_STATION_ID = document.getElementById("input-destination-station-id");
@@ -47,16 +52,41 @@ const ELEM_INPUT_URL = document.getElementById("input-url");
 const ELEM_IFRAME_PREVIEW = document.getElementById("iframe-preview");
 const ELEM_ANCHOR_URL = document.getElementById("anchor-url");
 
+const ELEM_CODE_URL = document.getElementById("code-url");
+
 let outputString;
 
 let busy = false;
 let queue = false;
 
+const miniSearch = new MiniSearch({
+  fields: ["Name"], // fields to index for full-text search
+  storeFields: ["Name", "Value"], // fields to return with search results
+});
+miniSearch.addAll(StopPlaces);
+
 window.addEventListener("load", () => {
   // searchStation("input-departure-station-search", "select-departure-station");
 });
 
+// --------------    Functions    --------------
 function searchStation(inputStationSearch, selectStation) {
+  if (ELEM_TOGGLE_CHECKBOX.checked) {
+    searchStationFetch(inputStationSearch, selectStation);
+  } else {
+    searchStationLocal(inputStationSearch, selectStation);
+  }
+}
+
+function searchStationLocal(inputStationSearch, selectStation) {
+  const searchText = document.getElementById(inputStationSearch).value;
+  const results = miniSearch.search(searchText, { prefix: true, fuzzy: 0.2 });
+  console.log("local search results: " + results);
+  clearList(selectStation);
+  fillList(selectStation, convertLocal(results));
+}
+
+function searchStationFetch(inputStationSearch, selectStation) {
   const searchText = document.getElementById(inputStationSearch).value;
   if (searchText.length < 2) return;
 
@@ -95,14 +125,15 @@ function searchStation(inputStationSearch, selectStation) {
         data = data.replace(";SLs.showSuggestion();", "");
 
         let outputJSON = JSON.parse(data.toString("utf8"));
+        console.log(outputJSON);
 
         clearList(selectStation);
-        fillList(selectStation, outputJSON);
+        fillList(selectStation, convertFetched(outputJSON));
 
         busy = false;
         if (queue) {
           queue = false;
-          searchStation(inputStationSearch, selectStation);
+          searchStation(inputStationSearch, convertFetched(outputJSON));
         }
       })
       .catch(function (response) {
@@ -115,15 +146,32 @@ function searchStation(inputStationSearch, selectStation) {
   }
 }
 
-function fillList(selectStation, outputJSON) {
-  const ELEM_SELECT_STATION = document.getElementById(selectStation);
+function convertLocal(data) {
+  let list = new Array();
+  for (let i = 0; i < data.length; i++) {
+    let item = { name: data[i].Name, id: data[i].Value };
+    list.push(item);
+  }
+  return list;
+}
+function convertFetched(outputJSON) {
   const STATIONS_LIST = outputJSON.suggestions;
+  let list = new Array();
   for (let i = 0; i < STATIONS_LIST.length; i++) {
+    let item = { name: STATIONS_LIST[i].value, id: STATIONS_LIST[i].extId.slice(2) };
+    list.push(item);
+  }
+  return list;
+}
+
+function fillList(selectStation, data) {
+  const ELEM_SELECT_STATION = document.getElementById(selectStation);
+  for (let i = 0; i < data.length; i++) {
     const newOption = document.createElement("option");
-    const optionText = document.createTextNode(STATIONS_LIST[i].value);
-    const extId = STATIONS_LIST[i].extId.slice(2);
+    const optionText = document.createTextNode(data[i].name);
+    const id = data[i].id;
     newOption.appendChild(optionText);
-    newOption.setAttribute("value", extId);
+    newOption.setAttribute("value", id);
     ELEM_SELECT_STATION.appendChild(newOption);
   }
 }
@@ -220,13 +268,16 @@ function generateURL() {
 
   ELEM_INPUT_URL.value = urlScotty;
   ELEM_IFRAME_PREVIEW.src = urlScotty;
+  ELEM_CODE_URL.innerText = urlScotty;
   // ELEM_ANCHOR_URL.href = urlScotty;
 }
 
 function copyURLToClipboard() {
+  console.log("copy url to clipboard");
   const copyContent = async () => {
     try {
       await navigator.clipboard.writeText(ELEM_INPUT_URL.value);
+      console.log("Copied the text: " + ELEM_INPUT_URL.value);
     } catch (err) {
       console.error("Failed to copy: ", err);
     }

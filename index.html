@@ -25,12 +25,20 @@
             ></path>
           </svg>
         </a>
-        <p>
+        <span>Search Mode</span>
+        <label class="toggle">
+          <span class="toggle-label">Train Stations</span>
+          <input class="toggle-checkbox" type="checkbox" />
+          <div class="toggle-switch"></div>
+          <span class="toggle-label">All Stations</span>
+        </label>
+
+        <!-- <p>
           Disable CORS before using. Works with
           <a href="https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino"
             >this chrome extension</a
           >
-        </p>
+        </p> -->
       </div>
 
       <!-- Departure Station -->
@@ -280,9 +288,18 @@
         <!-- <input type="text" readonly id="input-url" /> -->
         <textarea name="" id="input-url"></textarea>
         <!-- <a id="anchor-url" href="" target="_blank" rel="noopener noreferrer">Open</a> -->
+
+        <pre>
+        <code id="code-url"></code>
+        <button onclick="copyURLToClipboard()" >Copy</button>
+        </pre>
       </fieldset>
     </div>
 
+    <input type="button" value="bla" onclick="myMiniSearch()" />
+
+    <script src="./StopPlaces.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
