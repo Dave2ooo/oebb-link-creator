@@ -38,7 +38,8 @@ p {
 .fieldset-products-filter label {
 }
 
-.fieldset-products-filter input {
+.fieldset-products-filter input,
+.fieldset-board-type input {
   transform: scale(1.7);
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -47,20 +48,18 @@ p {
 
 .div-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr 1fr 0.1fr 0.1fr 0.1fr fr;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-rows: 0.5fr 1fr 0.1fr fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "div-inline div-inline"
-    "fieldset-departure fieldset-destination"
-    "fieldset-additional-time fieldset-products-filter"
-    "fieldset-num-journeys fieldset-products-filter"
-    "fieldset-board-type fieldset-products-filter"
-    "fieldset-url fieldset-url"
-    "fieldset-preview fieldset-preview";
+    "div-inline div-inline div-inline"
+    "fieldset-departure fieldset-destination fieldset-url"
+    "fieldset-additional-time fieldset-products-filter fieldset-preview "
+    "fieldset-num-journeys fieldset-products-filter fieldset-preview "
+    "fieldset-board-type fieldset-products-filter fieldset-preview ";
 
-  max-width: 800px;
+  /* max-width: 800px; */
   margin-left: auto;
   margin-right: auto;
 }
@@ -135,17 +134,126 @@ iframe {
   justify-content: space-between;
 }
 
+/* TOGGLE */
+
+.toggle {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.toggle-switch {
+  display: inline-block;
+  background: #ccc;
+  border-radius: 16px;
+  width: 58px;
+  height: 32px;
+  position: relative;
+  vertical-align: middle;
+  transition: background 0.25s;
+}
+.toggle-switch:before,
+.toggle-switch:after {
+  content: "";
+}
+.toggle-switch:before {
+  display: block;
+  background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transition: left 0.25s;
+}
+.toggle:hover .toggle-switch:before {
+  background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+/* .toggle-checkbox:checked + .toggle-switch {
+  background: #56c080;
+} */
+
+.toggle-checkbox:checked + .toggle-switch:before {
+  left: 30px;
+}
+
+.toggle-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+
+.toggle-label {
+  margin-left: 5px;
+  position: relative;
+  top: 2px;
+}
+/* URL */
+code,
+pre {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    padding: 0.2em;
+    margin: 0;
+    font-size: 0.875rem;
+    border-radius: 0.8em;
+}
+
+pre {
+    position: relative;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 10px;
+    border: 1px solid var(--color-accent);
+}
+pre code {
+    padding: 0;
+    font-size: 100%;
+}
+pre > button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.1s;
+    box-sizing: border-box;
+}
+pre:hover > button,
+pre > button.visible {
+    opacity: 1;
+}
+
+/* MEDIA QUERIES */
+
 @media (max-width: 40em) {
   .div-container {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 0.1fr 0.1fr 0.1fr fr 1fr;
     grid-template-areas:
-    "div-inline div-inline"
+      "div-inline div-inline"
       "fieldset-departure fieldset-departure"
       "fieldset-destination fieldset-destination"
       "fieldset-additional-time fieldset-products-filter"
       "fieldset-num-journeys fieldset-products-filter"
       "fieldset-board-type fieldset-products-filter"
+      "fieldset-url fieldset-url"
+      "fieldset-preview fieldset-preview";
+  }
+}
+
+@media (max-width: 80em) {
+  .div-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr 0.1fr 0.1fr 0.1fr fr;
+
+    grid-template-areas:
+      "div-inline div-inline"
+      "fieldset-departure fieldset-destination"
+      "fieldset-additional-time fieldset-products-filter"
+      "fieldset-num-journeys fieldset-products-filter"
+      "fieldset-board-type"
+      "fieldset-products-filter"
       "fieldset-url fieldset-url"
       "fieldset-preview fieldset-preview";
   }
