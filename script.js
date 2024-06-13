@@ -81,9 +81,13 @@ function searchStation(inputStationSearch, selectStation) {
 function searchStationLocal(inputStationSearch, selectStation) {
   const searchText = document.getElementById(inputStationSearch).value;
   const results = miniSearch.search(searchText, { prefix: true, fuzzy: 0.2 });
-  console.log("local search results: " + results);
+  // console.log("local search results: " + results);
   clearList(selectStation);
-  fillList(selectStation, convertLocal(results));
+  if (results.length) {
+    fillList(selectStation, convertLocal(results));
+  } else {
+    addText(selectStation, "No station found");
+  }
 }
 
 function searchStationFetch(inputStationSearch, selectStation) {
@@ -268,18 +272,21 @@ function generateURL() {
 
   ELEM_INPUT_URL.value = urlScotty;
   ELEM_IFRAME_PREVIEW.src = urlScotty;
-  ELEM_CODE_URL.innerText = urlScotty;
+  // ELEM_CODE_URL.innerText = urlScotty;
   // ELEM_ANCHOR_URL.href = urlScotty;
 }
 
-function copyURLToClipboard() {
-  console.log("copy url to clipboard");
-  const copyContent = async () => {
-    try {
-      await navigator.clipboard.writeText(ELEM_INPUT_URL.value);
-      console.log("Copied the text: " + ELEM_INPUT_URL.value);
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
-  };
+function refreshIframe() {
+  ELEM_IFRAME_PREVIEW.src = ELEM_IFRAME_PREVIEW.src;
+}
+
+async function copyURLToClipboard() {
+  try {
+    await navigator.clipboard.writeText(ELEM_INPUT_URL.value);
+    console.log("Content copied to clipboard");
+    /* Resolved - text copied to clipboard successfully */
+  } catch (err) {
+    console.error("Failed to copy: ", err);
+    /* Rejected - text failed to copy to the clipboard */
+  }
 }

@@ -25,14 +25,22 @@
             ></path>
           </svg>
         </a>
-        <span>Search Mode</span>
-        <label class="toggle">
-          <span class="toggle-label">Train Stations</span>
-          <input class="toggle-checkbox" type="checkbox" />
-          <div class="toggle-switch"></div>
-          <span class="toggle-label">All Stations</span>
-        </label>
-
+        <!-- <span>Search Mode</span> -->
+        <fieldset>
+          <legend>Search Mode</legend>
+          <label class="toggle">
+            <span class="toggle-label">Train Stations</span>
+            <input class="toggle-checkbox" type="checkbox" />
+            <div class="toggle-switch"></div>
+            <span class="toggle-label">All Stations</span>
+          </label>
+          <p>
+            Disable CORS before using. Works with
+            <a href="https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino"
+              >this chrome extension</a
+            >
+          </p>
+        </fieldset>
         <!-- <p>
           Disable CORS before using. Works with
           <a href="https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino"
@@ -280,23 +288,27 @@
 
       <fieldset class="fieldset-preview">
         <legend>Preview</legend>
-        <iframe src="" frameborder="0" id="iframe-preview"></iframe>
+        <div class="iframe-container">
+          <iframe src="" frameborder="0" id="iframe-preview"></iframe>
+          <button onclick="refreshIframe()">Refresh</button>
+        </div>
       </fieldset>
 
       <fieldset class="fieldset-url">
         <legend>URL</legend>
         <!-- <input type="text" readonly id="input-url" /> -->
-        <textarea name="" id="input-url"></textarea>
+        <textarea name="" id="input-url" readonly></textarea>
         <!-- <a id="anchor-url" href="" target="_blank" rel="noopener noreferrer">Open</a> -->
+        <button onclick="copyURLToClipboard()">Copy</button>
 
-        <pre>
+        <!-- <pre>
         <code id="code-url"></code>
         <button onclick="copyURLToClipboard()" >Copy</button>
-        </pre>
+        </pre> -->
       </fieldset>
     </div>
 
-    <input type="button" value="bla" onclick="myMiniSearch()" />
+    <!-- <input type="button" value="bla" onclick="myMiniSearch()" /> -->
 
     <script src="./StopPlaces.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js"></script>
