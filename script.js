@@ -6,6 +6,7 @@
 // const MiniSearch = require("minisearch");
 
 const ELEM_TOGGLE_CHECKBOX = document.querySelector(".toggle-checkbox");
+const ELEM_TOGGLE_DESCRIPTION = document.querySelector(".toggle-description");
 
 const ELEM_DEPARTURE_STATION_SEARCH = document.getElementById("input-departure-station-search");
 
@@ -17,6 +18,9 @@ const ELEM_INPUT_NUMBER_JOURNEYS = document.getElementById("input-number-of-jour
 
 const ELEM_RADIO_DEPARTURE = document.getElementById("departure");
 const ELEM_RADIO_ARRIVAL = document.getElementById("arrival");
+
+const ELEM_RADIO_GERMAN = document.getElementById("german");
+const ELEM_RADIO_ENGLISH = document.getElementById("english");
 
 const ELEM_CHECKBOX_PRODUCTS_FILTER_0 = document.getElementById("products-filter-0");
 const ELEM_CHECKBOX_PRODUCTS_FILTER_1 = document.getElementById("products-filter-1");
@@ -241,6 +245,14 @@ function generateURL() {
     urlParamBoardType = "arr";
   }
 
+  // Language
+  let urlParameterLanguage;
+  if (ELEM_RADIO_ENGLISH.checked) {
+    urlParameterLanguage = "en";
+  } else {
+    urlParameterLanguage = "de";
+  }
+
   // Train selection
   let urlParamTrainSelection = "";
   for (let i = ELEM_CHECKBOX_PRODUCTS_FILTER_LIST.length - 1; i >= 0; i--) {
@@ -252,7 +264,9 @@ function generateURL() {
   }
 
   const urlScotty =
-    "https://fahrplan.oebb.at/bin/stboard.exe/dn?L=vs_scotty.vs_liveticker&start=yes&eqstops=true" +
+    "https://fahrplan.oebb.at/bin/stboard.exe/" +
+    urlParameterLanguage +
+    "?L=vs_scotty.vs_liveticker&start=yes&eqstops=true" +
     "&evaId=" +
     urlParamDepartureStation +
     "&dirInput=" +
@@ -288,5 +302,13 @@ async function copyURLToClipboard() {
   } catch (err) {
     console.error("Failed to copy: ", err);
     /* Rejected - text failed to copy to the clipboard */
+  }
+}
+
+function toggleSearchMode() {
+  if (ELEM_TOGGLE_CHECKBOX.checked) {
+    ELEM_TOGGLE_DESCRIPTION.classList.remove("display-none");
+  } else {
+    ELEM_TOGGLE_DESCRIPTION.classList.add("display-none");
   }
 }

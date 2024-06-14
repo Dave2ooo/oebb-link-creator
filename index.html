@@ -26,15 +26,15 @@
           </svg>
         </a>
         <!-- <span>Search Mode</span> -->
-        <fieldset>
+        <fieldset class="fieldset-search-mode">
           <legend>Search Mode</legend>
           <label class="toggle">
             <span class="toggle-label">Train Stations</span>
-            <input class="toggle-checkbox" type="checkbox" />
+            <input class="toggle-checkbox" type="checkbox" onchange="toggleSearchMode()" />
             <div class="toggle-switch"></div>
             <span class="toggle-label">All Stations</span>
           </label>
-          <p>
+          <p class="toggle-description">
             Disable CORS before using. Works with
             <a href="https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino"
               >this chrome extension</a
@@ -122,6 +122,7 @@
         <input type="number" id="input-additional-time" value="5" min="0" onchange="generateURL()" />
       </fieldset>
 
+      <!-- Number of journeys -->
       <fieldset iclassd="fieldset-num-journeys">
         <legend>
           Number of <br />
@@ -130,6 +131,7 @@
         <input type="number" id="input-number-of-journeys" value="8" min="1" onchange="generateURL()" />
       </fieldset>
 
+      <!-- Board type -->
       <fieldset class="fieldset-board-type">
         <legend>Board type</legend>
         <div>
@@ -139,6 +141,19 @@
         <div>
           <input type="radio" id="arrival" name="board-type" value="arrival" onchange="generateURL()" />
           <label for="arrival">Arrival</label>
+        </div>
+      </fieldset>
+
+      <!-- Language -->
+      <fieldset class="fieldset-language">
+        <legend>Language</legend>
+        <div>
+          <input type="radio" id="german" name="languagage" value="german" onchange="generateURL()" checked />
+          <label for="german">German</label>
+        </div>
+        <div>
+          <input type="radio" id="english" name="languagage" value="english" onchange="generateURL()" />
+          <label for="english">English</label>
         </div>
       </fieldset>
 
