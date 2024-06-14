@@ -133,7 +133,7 @@ function searchStationFetch(inputStationSearch, selectStation) {
         data = data.replace(";SLs.showSuggestion();", "");
 
         let outputJSON = JSON.parse(data.toString("utf8"));
-        console.log(outputJSON);
+        // console.log(outputJSON);
 
         clearList(selectStation);
         fillList(selectStation, convertFetched(outputJSON));
@@ -141,16 +141,17 @@ function searchStationFetch(inputStationSearch, selectStation) {
         busy = false;
         if (queue) {
           queue = false;
-          searchStation(inputStationSearch, convertFetched(outputJSON));
+          // searchStation(inputStationSearch, convertFetched(outputJSON));
+          searchStationFetch(inputStationSearch, selectStation);
         }
-      })
+      }) /*
       .catch(function (response) {
         // "Not Found"
         console.log("catch response: " + response);
         clearList(selectStation);
         addText(selectStation, response);
         busy = false;
-      });
+      })*/;
   }
 }
 
@@ -186,6 +187,7 @@ function fillList(selectStation, data) {
 
 function clearList(selectStation) {
   const ELEM_SELECT_STATION = document.getElementById(selectStation);
+  console.log("selectStation: " + selectStation + ", elem: " + ELEM_SELECT_STATION);
   while (ELEM_SELECT_STATION.options.length > 0) {
     ELEM_SELECT_STATION.remove(0);
   }
