@@ -74,7 +74,7 @@ p {
     "fieldset-board-type fieldset-products-filter fieldset-preview "
     "fieldset-language fieldset-products-filter fieldset-preview ";
 
-  /* max-width: 800px; */
+  max-width: 800px;
   /* margin-left: auto;
   margin-right: auto; */
 }
