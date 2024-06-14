@@ -236,6 +236,11 @@ iframe + button {
   right: 20px;
 }
 
+textarea + button:active,
+iframe + button:active {
+  scale: 0.8;
+}
+
 textarea:hover + button,
 textarea + button:hover,
 iframe:hover + button,
@@ -286,5 +291,10 @@ iframe + button:hover {
       "fieldset-language fieldset-products-filter"
       "fieldset-url fieldset-url"
       "fieldset-preview fieldset-preview";
+  }
+
+  textarea + button,
+  iframe + button {
+    opacity: 1;
   }
 }
