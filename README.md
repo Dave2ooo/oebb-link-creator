@@ -37,4 +37,4 @@ Open [Scotty](https://fahrplan.oebb.at/bin/stboard.exe/en?protocol=https:&)
 ![image](https://github.com/Dave2ooo/oebb-link-creator/assets/71500391/3e0453ac-5d77-46b1-9e9b-6ce0581234bb)
 
 # Further Help
-If you have any questions, find any bugs of have ideas for improvement, please don't hesitate to create an [issue]([https://github.com/Dave2ooo/oebb-link-creator/issues](https://github.com/Dave2ooo/oebb-link-creator/issues/new)
+If you have any questions, find any bugs of have ideas for improvement, please don't hesitate to create an [issue](https://github.com/Dave2ooo/oebb-link-creator/issues/new).
