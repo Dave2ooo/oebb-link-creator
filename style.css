@@ -48,7 +48,7 @@ p {
 .fieldset-products-filter input,
 .fieldset-board-type input,
 .fieldset-language input {
-  transform: scale(1.7);
+  transform: scale(1.5);
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin-right: 0.7rem;
