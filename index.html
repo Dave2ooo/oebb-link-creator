@@ -128,14 +128,16 @@
         </div>
       </fieldset>
 
-      <!-- Settings -->
+      <!-- Additional time -->
       <fieldset class="fieldset-additioal-time">
         <legend>Additional time</legend>
-        <input type="number" id="input-additional-time" value="5" min="0" onchange="generateURL()" />
+        <form action="" method="get" class="form-example">
+          <input type="number" id="input-additional-time" value="5" min="0" onchange="generateURL()" />
+        </form>
       </fieldset>
 
       <!-- Number of journeys -->
-      <fieldset iclassd="fieldset-num-journeys">
+      <fieldset class="fieldset-num-journeys">
         <legend>
           Number of <br />
           displayed journeys
@@ -191,7 +193,7 @@
               name="products-filter-8"
               onchange="generateURL()"
               checked
-            />REX</label
+            />REX / CJX</label
           >
         </div>
         <div>
