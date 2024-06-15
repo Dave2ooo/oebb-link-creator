@@ -9,9 +9,18 @@ const ELEM_TOGGLE_CHECKBOX = document.querySelector(".toggle-checkbox");
 const ELEM_TOGGLE_DESCRIPTION = document.querySelector(".toggle-description");
 
 const ELEM_DEPARTURE_STATION_SEARCH = document.getElementById("input-departure-station-search");
+const ELEM_DESTINATION_STATION_SEARCH = document.getElementById("input-destination-station-search");
 
-const ELEM_INPUT_DESTINATION_STATION_ID = document.getElementById("input-destination-station-id");
+const ELEM_DEPARTURE_SUGGESTIONS_CONTAINER = document.getElementById("departure-suggestions");
+const ELEM_DESTINATION_SUGGESTIONS_CONTAINER = document.getElementById("destination-suggestions");
+
+let ELEM_DEPARTURE_SUGGESTIONS_LIST = [];
+let ELEM_DESTINATION_SUGGESTIONS_LIST = [];
+
+let ELEM_SUGGESTIONS_LIST = [ELEM_DEPARTURE_SUGGESTIONS_LIST, ELEM_DESTINATION_SUGGESTIONS_LIST];
+
 const ELEM_INPUT_DEPARTURE_STATION_ID = document.getElementById("input-departure-station-id");
+const ELEM_INPUT_DESTINATION_STATION_ID = document.getElementById("input-destination-station-id");
 
 const ELEM_INPUT_ADDITIONAL_TIME = document.getElementById("input-additional-time");
 const ELEM_INPUT_NUMBER_JOURNEYS = document.getElementById("input-number-of-journeys");
@@ -73,35 +82,74 @@ window.addEventListener("load", () => {
   // searchStation("input-departure-station-search", "select-departure-station");
 });
 
-// --------------    Functions    --------------
-function searchStation(inputStationSearch, selectStation) {
-  if (ELEM_TOGGLE_CHECKBOX.checked) {
-    searchStationFetch(inputStationSearch, selectStation);
-  } else {
-    searchStationLocal(inputStationSearch, selectStation);
+function selectListentry(selectedEntryIndex, suggestionsList, inputStationID) {
+  console.log("selectListentry: " + inputStationID);
+  console.log("selected item: " + selectedEntryIndex);
+  for (let i = 0; i < ELEM_SUGGESTIONS_LIST[suggestionsList].length; i++) {
+    ELEM_SUGGESTIONS_LIST[suggestionsList][i].classList.remove("background-selected");
   }
+  ELEM_SUGGESTIONS_LIST[suggestionsList][selectedEntryIndex].classList.add("background-selected");
+  console.log("inputStationID: " + inputStationID);
+  inputStationID.value = ELEM_SUGGESTIONS_LIST[suggestionsList][selectedEntryIndex].id;
+  generateURL();
 }
 
-function searchStationLocal(inputStationSearch, selectStation) {
-  const searchText = document.getElementById(inputStationSearch).value;
+// --------------    Functions    --------------
+function searchStation(dep_arr) {
+  let inputStationSearch;
+  let selectStation;
+  // let suggestionsList;
+  let inputStationID;
+
+  if (dep_arr == "dep") {
+    inputStationSearch = ELEM_DEPARTURE_STATION_SEARCH;
+    selectStation = ELEM_DEPARTURE_SUGGESTIONS_CONTAINER;
+    // suggestionsList = ELEM_DEPARTURE_SUGGESTIONS_LIST;
+    suggestionsList = 0;
+    inputStationID = ELEM_INPUT_DEPARTURE_STATION_ID;
+  } else if (dep_arr == "arr") {
+    inputStationSearch = ELEM_DESTINATION_STATION_SEARCH;
+    selectStation = ELEM_DESTINATION_SUGGESTIONS_CONTAINER;
+    // suggestionsList = ELEM_DESTINATION_SUGGESTIONS_LIST;
+    suggestionsList = 1;
+    inputStationID = ELEM_INPUT_DESTINATION_STATION_ID;
+  }
+
+  if (ELEM_TOGGLE_CHECKBOX.checked) {
+    searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID);
+  } else {
+    searchStationLocal(inputStationSearch, selectStation, suggestionsList, inputStationID);
+  }
+  /*if (ELEM_TOGGLE_CHECKBOX.checked) {
+    searchStationFetch(inputStationSearch, selectStation, inputStationID);
+  } else {
+    searchStationLocal(inputStationSearch, selectStation, inputStationID);
+  }*/
+}
+
+function searchStationLocal(inputStationSearch, selectStation, suggestionsList, inputStationID) {
+  console.log("searchStationLocal: " + inputStationID);
+  const searchText = inputStationSearch.value;
   const results = miniSearch.search(searchText, { prefix: true, fuzzy: 0.2 });
   // console.log("local search results: " + results);
-  clearList(selectStation);
+  clearList(selectStation, suggestionsList);
   if (results.length) {
-    fillList(selectStation, convertLocal(results));
+    // fillList(selectStation, convertLocal(results), suggestionsList, inputStationID);
+    fillList(selectStation, convertLocal(results), suggestionsList, inputStationID);
   } else {
     addText(selectStation, "No station found");
   }
 }
 
-function searchStationFetch(inputStationSearch, selectStation) {
-  const searchText = document.getElementById(inputStationSearch).value;
+function searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID) {
+  console.log("searchStationFetch: " + inputStationID);
+  const searchText = inputStationSearch.value;
   if (searchText.length < 2) return;
 
   if (busy) {
     queue = true;
   } else {
-    clearList(selectStation);
+    clearList(selectStation, suggestionsList);
     addText(selectStation, "searching...");
     busy = true;
     const searchTextMod = searchText.replace(" ", "%20");
@@ -135,20 +183,20 @@ function searchStationFetch(inputStationSearch, selectStation) {
         let outputJSON = JSON.parse(data.toString("utf8"));
         // console.log(outputJSON);
 
-        clearList(selectStation);
-        fillList(selectStation, convertFetched(outputJSON));
+        clearList(selectStation, suggestionsList);
+        fillList(selectStation, convertFetched(outputJSON), suggestionsList, inputStationID);
 
         busy = false;
         if (queue) {
           queue = false;
           // searchStation(inputStationSearch, convertFetched(outputJSON));
-          searchStationFetch(inputStationSearch, selectStation);
+          searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID);
         }
       }) /*
       .catch(function (response) {
         // "Not Found"
         console.log("catch response: " + response);
-        clearList(selectStation);
+    clearList(selectStation, suggestionsList);
         addText(selectStation, response);
         busy = false;
       })*/;
@@ -173,7 +221,9 @@ function convertFetched(outputJSON) {
   return list;
 }
 
-function fillList(selectStation, data) {
+function fillList(selectStation, data, suggestionsList, inputStationID) {
+  console.log("fillList: " + inputStationID);
+  /*
   const ELEM_SELECT_STATION = document.getElementById(selectStation);
   for (let i = 0; i < data.length; i++) {
     const newOption = document.createElement("option");
@@ -182,26 +232,48 @@ function fillList(selectStation, data) {
     newOption.appendChild(optionText);
     newOption.setAttribute("value", id);
     ELEM_SELECT_STATION.appendChild(newOption);
+  }*/
+  /*if (suggestionsList == undefined) {
+    console.log("suggestionsList is undefined");
+    return;
+  }*/
+
+  for (let i = 0; i < data.length; i++) {
+    const ELEM_LISTENTRY = document.createElement("div");
+    ELEM_SUGGESTIONS_LIST[suggestionsList][i] = ELEM_LISTENTRY;
+    ELEM_LISTENTRY.innerText = data[i].name;
+    ELEM_LISTENTRY.classList.add("listentry");
+    ELEM_LISTENTRY.id = data[i].id;
+    ELEM_LISTENTRY.onclick = function () {
+      selectListentry(i, suggestionsList, inputStationID);
+    };
+    selectStation.appendChild(ELEM_LISTENTRY);
   }
 }
 
-function clearList(selectStation) {
-  const ELEM_SELECT_STATION = document.getElementById(selectStation);
-  console.log("selectStation: " + selectStation + ", elem: " + ELEM_SELECT_STATION);
-  while (ELEM_SELECT_STATION.options.length > 0) {
-    ELEM_SELECT_STATION.remove(0);
+function clearList(selectStation, suggestionsList) {
+  // const ELEM_SELECT_STATION = document.getElementById(selectStation);
+  // console.log("selectStation: " + selectStation + ", elem: " + ELEM_SELECT_STATION);
+  // while (ELEM_SELECT_STATION.options.length > 0) {
+  //   ELEM_SELECT_STATION.remove(0);
+  // }
+  // ELEM_DEPARTURE_SUGGESTIONS_LIST = [];
+  // suggestionsList.length = 0;
+  ELEM_SUGGESTIONS_LIST[suggestionsList] = [];
+  while (selectStation.firstChild) {
+    selectStation.removeChild(selectStation.firstChild);
   }
 }
 
 function addText(selectStation, text) {
-  const ELEM_SELECT_STATION = document.getElementById(selectStation);
-  const newOption = document.createElement("option");
-  const optionText = document.createTextNode(text);
-  newOption.appendChild(optionText);
-  ELEM_SELECT_STATION.appendChild(newOption);
+  const ELEM_LISTENTRY = document.createElement("div");
+  ELEM_LISTENTRY.innerText = text;
+  ELEM_LISTENTRY.classList.add("listentry");
+  selectStation.appendChild(ELEM_LISTENTRY);
 }
 
 function takeOverID(selectStation, inputStationID) {
+  console.log("takeOverID: " + inputStationID);
   const ELEM_SELECT_STATION = document.getElementById(selectStation);
   const ELEM_INPUT_STATION_ID = document.getElementById(inputStationID);
   ELEM_INPUT_STATION_ID.value = ELEM_SELECT_STATION.value;

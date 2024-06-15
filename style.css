@@ -2,13 +2,14 @@
   --background-color: #2b2e33;
   --input-background-color: #1e1e1e;
   --iframe-scale: 1.4;
+  --font-scale: 1.1rem;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: var(--background-color);
   color: white;
-  font-size: 1.1rem;
+  font-size: var(--font-scale);
 }
 
 input,
@@ -58,6 +59,20 @@ p {
 }
 
 .fieldset-search-mode {
+}
+
+.suggestion-container {
+  height: calc(6.7 * var(--font-scale));
+  overflow-y: auto;
+  border: 1px solid white;
+}
+
+.background-selected {
+  background-color: #ffaf80;
+}
+
+.listentry {
+  cursor: default;
 }
 
 .div-container {
