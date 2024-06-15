@@ -1,3 +1,7 @@
+// This dataset should contain all trian stations in Autria
+// It is a stripped down version of the dataset that ÖBB provides (state 12-2024)
+// https://data.oebb.at/de/datensaetze~netex-geodaten~
+
 const StopPlaces = [
   {
     id: 1,
