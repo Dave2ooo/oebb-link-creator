@@ -83,13 +83,10 @@ window.addEventListener("load", () => {
 });
 
 function selectListentry(selectedEntryIndex, suggestionsList, inputStationID) {
-  console.log("selectListentry: " + inputStationID);
-  console.log("selected item: " + selectedEntryIndex);
   for (let i = 0; i < ELEM_SUGGESTIONS_LIST[suggestionsList].length; i++) {
     ELEM_SUGGESTIONS_LIST[suggestionsList][i].classList.remove("background-selected");
   }
   ELEM_SUGGESTIONS_LIST[suggestionsList][selectedEntryIndex].classList.add("background-selected");
-  console.log("inputStationID: " + inputStationID);
   inputStationID.value = ELEM_SUGGESTIONS_LIST[suggestionsList][selectedEntryIndex].id;
   generateURL();
 }
@@ -98,19 +95,17 @@ function selectListentry(selectedEntryIndex, suggestionsList, inputStationID) {
 function searchStation(dep_arr) {
   let inputStationSearch;
   let selectStation;
-  // let suggestionsList;
   let inputStationID;
+  let suggestionsList;
 
   if (dep_arr == "dep") {
     inputStationSearch = ELEM_DEPARTURE_STATION_SEARCH;
     selectStation = ELEM_DEPARTURE_SUGGESTIONS_CONTAINER;
-    // suggestionsList = ELEM_DEPARTURE_SUGGESTIONS_LIST;
     suggestionsList = 0;
     inputStationID = ELEM_INPUT_DEPARTURE_STATION_ID;
   } else if (dep_arr == "arr") {
     inputStationSearch = ELEM_DESTINATION_STATION_SEARCH;
     selectStation = ELEM_DESTINATION_SUGGESTIONS_CONTAINER;
-    // suggestionsList = ELEM_DESTINATION_SUGGESTIONS_LIST;
     suggestionsList = 1;
     inputStationID = ELEM_INPUT_DESTINATION_STATION_ID;
   }
@@ -120,21 +115,13 @@ function searchStation(dep_arr) {
   } else {
     searchStationLocal(inputStationSearch, selectStation, suggestionsList, inputStationID);
   }
-  /*if (ELEM_TOGGLE_CHECKBOX.checked) {
-    searchStationFetch(inputStationSearch, selectStation, inputStationID);
-  } else {
-    searchStationLocal(inputStationSearch, selectStation, inputStationID);
-  }*/
 }
 
 function searchStationLocal(inputStationSearch, selectStation, suggestionsList, inputStationID) {
-  console.log("searchStationLocal: " + inputStationID);
   const searchText = inputStationSearch.value;
   const results = miniSearch.search(searchText, { prefix: true, fuzzy: 0.2 });
-  // console.log("local search results: " + results);
   clearList(selectStation, suggestionsList);
   if (results.length) {
-    // fillList(selectStation, convertLocal(results), suggestionsList, inputStationID);
     fillList(selectStation, convertLocal(results), suggestionsList, inputStationID);
   } else {
     addText(selectStation, "No station found");
@@ -142,7 +129,6 @@ function searchStationLocal(inputStationSearch, selectStation, suggestionsList, 
 }
 
 function searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID) {
-  console.log("searchStationFetch: " + inputStationID);
   const searchText = inputStationSearch.value;
   if (searchText.length < 2) return;
 
@@ -160,7 +146,7 @@ function searchStationFetch(inputStationSearch, selectStation, suggestionsList, 
 
     fetch(searchURL)
       .then(function (response) {
-        console.log("then response: " + response);
+        // console.log("then response: " + response);
         switch (response.status) {
           // status "OK"
           case 200:
@@ -175,8 +161,6 @@ function searchStationFetch(inputStationSearch, selectStation, suggestionsList, 
         let decoder = new TextDecoder("iso-8859-1");
         data = decoder.decode(data);
 
-        // console.log("this is my text: " + data);
-
         data = data.replace("SLs.sls=", "");
         data = data.replace(";SLs.showSuggestion();", "");
 
@@ -189,17 +173,15 @@ function searchStationFetch(inputStationSearch, selectStation, suggestionsList, 
         busy = false;
         if (queue) {
           queue = false;
-          // searchStation(inputStationSearch, convertFetched(outputJSON));
           searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID);
         }
-      }) /*
+      })
       .catch(function (response) {
         // "Not Found"
-        console.log("catch response: " + response);
-    clearList(selectStation, suggestionsList);
+        clearList(selectStation, suggestionsList);
         addText(selectStation, response);
         busy = false;
-      })*/;
+      });
   }
 }
 
@@ -222,22 +204,6 @@ function convertFetched(outputJSON) {
 }
 
 function fillList(selectStation, data, suggestionsList, inputStationID) {
-  console.log("fillList: " + inputStationID);
-  /*
-  const ELEM_SELECT_STATION = document.getElementById(selectStation);
-  for (let i = 0; i < data.length; i++) {
-    const newOption = document.createElement("option");
-    const optionText = document.createTextNode(data[i].name);
-    const id = data[i].id;
-    newOption.appendChild(optionText);
-    newOption.setAttribute("value", id);
-    ELEM_SELECT_STATION.appendChild(newOption);
-  }*/
-  /*if (suggestionsList == undefined) {
-    console.log("suggestionsList is undefined");
-    return;
-  }*/
-
   for (let i = 0; i < data.length; i++) {
     const ELEM_LISTENTRY = document.createElement("div");
     ELEM_SUGGESTIONS_LIST[suggestionsList][i] = ELEM_LISTENTRY;
@@ -252,13 +218,6 @@ function fillList(selectStation, data, suggestionsList, inputStationID) {
 }
 
 function clearList(selectStation, suggestionsList) {
-  // const ELEM_SELECT_STATION = document.getElementById(selectStation);
-  // console.log("selectStation: " + selectStation + ", elem: " + ELEM_SELECT_STATION);
-  // while (ELEM_SELECT_STATION.options.length > 0) {
-  //   ELEM_SELECT_STATION.remove(0);
-  // }
-  // ELEM_DEPARTURE_SUGGESTIONS_LIST = [];
-  // suggestionsList.length = 0;
   ELEM_SUGGESTIONS_LIST[suggestionsList] = [];
   while (selectStation.firstChild) {
     selectStation.removeChild(selectStation.firstChild);
@@ -273,7 +232,6 @@ function addText(selectStation, text) {
 }
 
 function takeOverID(selectStation, inputStationID) {
-  console.log("takeOverID: " + inputStationID);
   const ELEM_SELECT_STATION = document.getElementById(selectStation);
   const ELEM_INPUT_STATION_ID = document.getElementById(inputStationID);
   ELEM_INPUT_STATION_ID.value = ELEM_SELECT_STATION.value;
