@@ -51,12 +51,13 @@
 
       <!-- Departure Station -->
       <fieldset class="fieldset-departure">
-        <legend>Departure Station</legend>
+        <legend>Departure Station (required)</legend>
         <input
-          type="text"
+          type="search"
+          inputmode="search"
           id="input-departure-station-search"
           value=""
-          placeholder="Enter Station here (required)"
+          placeholder="Search..."
           oninput="searchStation('dep')"
         />
         <!-- oninput="searchStation('input-departure-station-search', 'select-departure-station')" -->
@@ -76,11 +77,13 @@
         <div id="departure-suggestions" class="suggestion-container"></div>
 
         <div class="div-id">
-          <label for="name">Station ID</label>
+          <label for="name">ID</label>
           <input
-            type="text"
+            type="number"
+            inputmode="numeric"
             id="input-departure-station-id"
-            placeholder="Select Station from above"
+            class="input-station-id"
+            placeholder="Select  from above"
             oninput="generateURL()"
           />
         </div>
@@ -88,11 +91,12 @@
 
       <!-- Destination Station -->
       <fieldset class="fieldset-destination">
-        <legend>Destination Station</legend>
+        <legend>Destination Station (optional)</legend>
         <input
-          type="text"
+          type="search"
+          inputmode="search"
           id="input-destination-station-search"
-          placeholder="Enter Station here (optional)"
+          placeholder="Search..."
           oninput="searchStation('arr')"
         />
         <!-- oninput="searchStation('input-destination-station-search', 'select-destination-station')" -->
@@ -112,11 +116,13 @@
         <div id="destination-suggestions" class="suggestion-container"></div>
 
         <div class="div-id">
-          <label for="name">Station ID</label>
+          <label for="name">ID</label>
           <input
-            type="text"
+            type="number"
+            inputmode="numeric"
             id="input-destination-station-id"
-            placeholder="Select Station from above"
+            class="input-station-id"
+            placeholder="Select from above"
             oninput="generateURL()"
           />
         </div>
