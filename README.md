@@ -10,14 +10,14 @@ To search for a station there are three methods available
 ## Search Train Stations
 ![image](https://github.com/Dave2ooo/oebb-link-creator/assets/71500391/1ee9cee8-cd25-469c-9e2c-f171049fea69)
 
-This method uses a dataset of all Austrian train stations. If you cannot find your desired station use the other search meghods.
+This method uses a dataset of all Austrian train stations. If you cannot find your desired station use the other search methods.
 
 ## Search all Stations
 ![image](https://github.com/Dave2ooo/oebb-link-creator/assets/71500391/46aa051a-f5c2-4206-b17a-3e8346106065)
 
 This method uses [Scotty](https://fahrplan.oebb.at/bin/stboard.exe/en?protocol=https:&) in the background.
 Unfortunately, Scotty does not allow Cross-origin resource sharing ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).
-To use this method, CORS must be disabled.
+So, to use this method, CORS must be disabled.
 In Chrome this [**CORS Unblock**](https://chromewebstore.google.com/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino) extension works great.
 
 
@@ -27,12 +27,12 @@ If the previous method does not work you can use this manual fallback.
 Open [Scotty](https://fahrplan.oebb.at/bin/stboard.exe/en?protocol=https:&)
 1. Enter your desired station
 2. Press **Display inforation**
-3. Press **View <HTML> sourcecode**
-4. Copy the **extId**
+3. Press **View \<HTML\> sourcecode**
+4. Copy the **evaId**
 
 ![image](https://github.com/Dave2ooo/oebb-link-creator/assets/71500391/b4ec7a27-8210-4ac2-990b-14cb692d5a0b)
 
-5. Enter the **extId** into the **Station ID** textbox
+5. Enter the **evaId** into the **Station ID** textbox
 
 ![image](https://github.com/Dave2ooo/oebb-link-creator/assets/71500391/3e0453ac-5d77-46b1-9e9b-6ce0581234bb)
 
