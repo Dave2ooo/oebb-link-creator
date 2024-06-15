@@ -65,10 +65,11 @@ p {
   height: calc(6.7 * var(--font-scale));
   overflow-y: auto;
   border: 1px solid white;
+  margin-bottom: 0.5rem;
 }
 
 .background-selected {
-  background-color: #ffaf80;
+  background-color: #0045ad;
 }
 
 .listentry {
@@ -158,7 +159,18 @@ textarea {
 
 #input-departure-station-id,
 #input-destination-station-id {
-  width: auto;
+  width: 16ch;
+}
+
+.input-station-id::-webkit-outer-spin-button,
+.input-station-id::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input-station-id[type="number"] {
+  -moz-appearance: textfield;
 }
 
 iframe {
