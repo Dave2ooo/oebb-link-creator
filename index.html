@@ -131,9 +131,14 @@
       <!-- Additional time -->
       <fieldset class="fieldset-additioal-time">
         <legend>Additional time</legend>
-        <form action="" method="get" class="form-example">
-          <input type="number" id="input-additional-time" value="5" min="0" onchange="generateURL()" />
-        </form>
+        <input
+          type="number"
+          inputmode="numeric"
+          id="input-additional-time"
+          value="5"
+          min="0"
+          onchange="generateURL()"
+        />
       </fieldset>
 
       <!-- Number of journeys -->
@@ -142,7 +147,14 @@
           Number of <br />
           displayed journeys
         </legend>
-        <input type="number" id="input-number-of-journeys" value="8" min="1" onchange="generateURL()" />
+        <input
+          type="number"
+          inputmode="numeric"
+          id="input-number-of-journeys"
+          value="8"
+          min="1"
+          onchange="generateURL()"
+        />
       </fieldset>
 
       <!-- Board type -->
