@@ -259,7 +259,8 @@ iframe + button {
   position: absolute;
   opacity: 0;
   transition: opacity 0.1s;
-  top: 10px;
+  /* top: 10px; */
+  bottom: 20px;
   right: 20px;
 }
 
