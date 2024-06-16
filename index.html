@@ -77,7 +77,7 @@
         <div id="departure-suggestions" class="suggestion-container"></div>
 
         <div class="div-id">
-          <label for="name">ID</label>
+          <label for="input-departure-station-id">ID</label>
           <input
             type="number"
             inputmode="numeric"
@@ -116,7 +116,7 @@
         <div id="destination-suggestions" class="suggestion-container"></div>
 
         <div class="div-id">
-          <label for="name">ID</label>
+          <label for="input-destination-station-id">ID</label>
           <input
             type="number"
             inputmode="numeric"
@@ -125,6 +125,7 @@
             placeholder="Select from above"
             oninput="generateURL()"
           />
+          <input type="button" onclick="clearDestinationID()" value="X" alt="Clear" />
         </div>
       </fieldset>
 

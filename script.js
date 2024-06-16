@@ -344,3 +344,8 @@ function toggleSearchMode() {
     ELEM_TOGGLE_DESCRIPTION.classList.add("display-none");
   }
 }
+
+function clearDestinationID() {
+  ELEM_INPUT_DESTINATION_STATION_ID.value = "";
+  generateURL();
+}
