@@ -1,20 +1,20 @@
-Visit the Link Creator here -> https://dave2ooo.github.io/oebb-link-creator/
+Visit the Link Creator here: [ÖBB Link Creator](https://dave2ooo.github.io/oebb-link-creator/)
 
 # Introduction
-This tool helps you to create a URL that shows the departure and arrival times of your public transformation station.
+This tool helps you to create a URL that shows the departure times of your public transformation station.
 
 ![image](https://github.com/Dave2ooo/oebb-link-creator/assets/71500391/d43cae57-fe9c-4e17-a149-74c17a507724)
 
 The monitor is provided by the ÖBB, but getting the right parateters is quite tedious and barely documented. 
 
-With this Link Creator you can easily select your departure station, destination station and means of transportation.
+With this [Link Creator](https://dave2ooo.github.io/oebb-link-creator/), you can easily choose your departure station, destination station, means of transportation and more.
 
 # Sarch mode
 To search for a station there are three options available
 ## Search Train Stations
 ![image](https://github.com/Dave2ooo/oebb-link-creator/assets/71500391/1ee9cee8-cd25-469c-9e2c-f171049fea69)
 
-This method uses a dataset of all Austrian train stations. If you cannot find your desired station, use the other search options described below.
+This method uses a dataset of all Austrian **train stations**. If you cannot find your desired station, use the other search options described below.
 
 ## Search all Stations
 ![image](https://github.com/Dave2ooo/oebb-link-creator/assets/71500391/46aa051a-f5c2-4206-b17a-3e8346106065)
