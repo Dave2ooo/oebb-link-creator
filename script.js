@@ -67,6 +67,8 @@ const ELEM_ANCHOR_URL = document.getElementById("anchor-url");
 
 const ELEM_CODE_URL = document.getElementById("code-url");
 
+const ELEM_LOADING_SPINNER = document.querySelector(".lds-dual-ring");
+
 let outputString;
 
 let busy = false;
@@ -318,12 +320,14 @@ function generateURL() {
 
   ELEM_INPUT_URL.value = urlScotty;
   ELEM_IFRAME_PREVIEW.src = urlScotty;
+  showLoadingScreen();
   // ELEM_CODE_URL.innerText = urlScotty;
   // ELEM_ANCHOR_URL.href = urlScotty;
 }
 
 function refreshIframe() {
   ELEM_IFRAME_PREVIEW.src = ELEM_IFRAME_PREVIEW.src;
+  showLoadingScreen();
 }
 
 async function copyURLToClipboard() {
@@ -348,4 +352,16 @@ function toggleSearchMode() {
 function clearDestinationID() {
   ELEM_INPUT_DESTINATION_STATION_ID.value = "";
   generateURL();
+}
+
+function showLoadingScreen() {
+  // console.log("showLoadingScreen");
+  // ELEM_LOADING_SPINNER.style.display = "block";
+  ELEM_LOADING_SPINNER.classList.remove("display-none");
+}
+
+function hideLoadingScreen() {
+  // console.log("hideLoadingScreen");
+  // ELEM_LOADING_SPINNER.style.display = "none";
+  ELEM_LOADING_SPINNER.classList.add("display-none");
 }
