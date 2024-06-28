@@ -84,6 +84,23 @@ window.addEventListener("load", () => {
   // searchStation("input-departure-station-search", "select-departure-station");
 });
 
+// global variable where fetched station list is stored
+// DO NOT RENAME this variable, since it is used by the response of fahrplan.oebb.at
+let SLs = {
+  // result of fetch
+  // DO NOT RENAME this variable, since it is used by the response of fahrplan.oebb.at
+  sls: [],
+
+  // callback when fetch is successful
+  showSuggestion: handleSuccessfulStationFetch,
+
+  // stored parameters 
+  inputStationSearch: null,
+  selectStation: null,
+  suggestionsList: null,
+  inputStationID: null
+}
+
 function selectListentry(selectedEntryIndex, suggestionsList, inputStationID) {
   for (let i = 0; i < ELEM_SUGGESTIONS_LIST[suggestionsList].length; i++) {
     ELEM_SUGGESTIONS_LIST[suggestionsList][i].classList.remove("background-selected");
@@ -137,6 +154,18 @@ function searchStationFetch(inputStationSearch, selectStation, suggestionsList, 
   if (busy) {
     queue = true;
   } else {
+    // save params for later use
+    SLs.inputStationSearch = inputStationSearch;
+    SLs.selectStation = selectStation;
+    SLs.suggestionsList = suggestionsList;
+    SLs.inputStationID = inputStationID;
+
+    // remove old script tags
+    const oldScripts = document.querySelector("script[data-id='scotty_jsonp']");
+    if (oldScripts) {
+      oldScripts.remove();
+    }
+
     clearList(selectStation, suggestionsList);
     addText(selectStation, "searching...");
     busy = true;
@@ -146,44 +175,32 @@ function searchStationFetch(inputStationSearch, selectStation, suggestionsList, 
       searchTextMod +
       "?&js=true&";
 
-    fetch(searchURL)
-      .then(function (response) {
-        // console.log("then response: " + response);
-        switch (response.status) {
-          // status "OK"
-          case 200:
-            // return response.text();
-            return response.arrayBuffer();
-          // status "Not Found"
-          case 404:
-            throw response;
-        }
-      })
-      .then(function (data) {
-        let decoder = new TextDecoder("iso-8859-1");
-        data = decoder.decode(data);
+    let scriptElt = document.createElement("script");
+    scriptElt.setAttribute("data-id", "scotty_jsonp");  
+    scriptElt.src = searchURL;
+    scriptElt.onerror = () => {
+      // "Not Found"
+      clearList(selectStation, suggestionsList);
+      addText(selectStation, response);
+      busy = false;
+    };
+    document.body.appendChild(scriptElt);
+  }
+}
 
-        data = data.replace("SLs.sls=", "");
-        data = data.replace(";SLs.showSuggestion();", "");
+function handleSuccessfulStationFetch() {
+  let selectStation = SLs.selectStation;
+  let suggestionsList = SLs.suggestionsList;
+  let inputStationID = SLs.inputStationID;
+  let inputStationSearch = SLs.inputStationSearch;
 
-        let outputJSON = JSON.parse(data.toString("utf8"));
-        // console.log(outputJSON);
+  clearList(selectStation, suggestionsList);
+  fillList(selectStation, convertFetched(SLs.sls), suggestionsList, inputStationID);
 
-        clearList(selectStation, suggestionsList);
-        fillList(selectStation, convertFetched(outputJSON), suggestionsList, inputStationID);
-
-        busy = false;
-        if (queue) {
-          queue = false;
-          searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID);
-        }
-      })
-      .catch(function (response) {
-        // "Not Found"
-        clearList(selectStation, suggestionsList);
-        addText(selectStation, response);
-        busy = false;
-      });
+  busy = false;
+  if (queue) {
+    queue = false;
+    searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID);
   }
 }
 
