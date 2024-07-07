@@ -1,0 +1,114 @@
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ÖBB Link Creator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Mode 3 -->
+    <div id="container-mode3">
+      <!-- Top Bar -->
+      <div class="div-inline">
+        <button onclick="window.location.href='./index.html'">Back</button>
+        <!-- Github logo -->
+        <a
+          class="AppHeader-logo ml-2"
+          href="https://github.com/Dave2ooo/oebb-link-creator"
+          data-hotkey="g d"
+          aria-label="Homepage "
+          data-turbo="false"
+        >
+          <svg height="32" aria-hidden="true" viewBox="0 0 16 16" width="32" data-view-component="true">
+            <path
+              d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+              fill="#ffffff"
+            ></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Departure Station -->
+      <fieldset class="fieldset-departure">
+        <legend>Departure Station (required)</legend>
+        <input
+          type="search"
+          inputmode="search"
+          id="input-departure-station-search"
+          class="full-width"
+          value=""
+          placeholder="Search..."
+          oninput="searchStation('dep')"
+        />
+        <!-- oninput="searchStation('input-departure-station-search', 'select-departure-station')" -->
+        <!-- <input
+          type="button"
+          onClick="searchStation('input-departure-station-search', 'select-departure-station')"
+          value="Search"
+        /> -->
+
+        <!-- <select
+          name="stations"
+          id="select-departure-station"
+          size="6"
+          oninput="takeOverID('select-departure-station','input-departure-station-id')"
+        ></select> -->
+
+        <div id="departure-suggestions" class="suggestion-container"></div>
+
+        <div class="div-id">
+          <label for="input-departure-station-id">ID</label>
+          <input
+            type="text"
+            inputmode="numeric"
+            id="input-departure-station-id"
+            class="input-station-id"
+            placeholder="Select  from above"
+            oninput="generateURL()"
+          />
+        </div>
+      </fieldset>
+
+      <!-- Board type -->
+      <fieldset class="fieldset-board-type">
+        <legend>Board type</legend>
+        <div>
+          <input type="radio" id="departure" name="board-type" value="departure" onchange="generateURL()" checked />
+          <label for="departure">Departure</label>
+        </div>
+        <div>
+          <input type="radio" id="arrival" name="board-type" value="arrival" onchange="generateURL()" />
+          <label for="arrival">Arrival</label>
+        </div>
+      </fieldset>
+
+      <!-- Output -->
+      <!-- 
+      <fieldset class="fieldset-preview">
+        <legend>Preview</legend>
+        <div class="iframe-container">
+          <iframe src="" frameborder="0" id="iframe-preview" onload="hideLoadingScreen()"></iframe>
+          <button onclick="refreshIframe()">Refresh</button>
+          <div class="lds-dual-ring display-none"></div>
+        </div>
+      </fieldset> -->
+
+      <fieldset class="fieldset-url">
+        <legend>URL</legend>
+        <!-- <input type="text" readonly id="input-url" /> -->
+        <textarea name="" id="input-url" readonly></textarea>
+        <!-- <a id="anchor-url" href="" target="_blank" rel="noopener noreferrer">Open</a> -->
+        <button onclick="copyURLToClipboard()">Copy</button>
+
+        <button onclick="openInNewTab()">Open in new tab</button>
+        <!-- <pre>
+        <code id="code-url"></code>
+        <button onclick="copyURLToClipboard()" >Copy</button>
+        </pre> -->
+      </fieldset>
+    </div>
+    <script src="./Verkehrsstationen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js"></script>
+    <script src="./mode3.js"></script>
+  </body>
+</html>
