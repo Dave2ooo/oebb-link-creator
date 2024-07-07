@@ -5,6 +5,7 @@
 // import MiniSearch from "minisearch";
 // const MiniSearch = require("minisearch");
 
+// #region Define global variables */
 const ELEM_TOGGLE_CHECKBOX = document.querySelector(".toggle-checkbox");
 const ELEM_TOGGLE_DESCRIPTION = document.querySelector(".toggle-description");
 
@@ -109,8 +110,9 @@ function selectListentry(selectedEntryIndex, suggestionsList, inputStationID) {
   inputStationID.value = ELEM_SUGGESTIONS_LIST[suggestionsList][selectedEntryIndex].id;
   generateURL();
 }
+// #endregion
 
-// --------------    Functions    --------------
+// #region Functions
 function searchStation(dep_arr) {
   let inputStationSearch;
   let selectStation;
@@ -374,3 +376,4 @@ function hideLoadingScreen() {
   // ELEM_LOADING_SPINNER.style.display = "none";
   ELEM_LOADING_SPINNER.classList.add("display-none");
 }
+// #endregion
