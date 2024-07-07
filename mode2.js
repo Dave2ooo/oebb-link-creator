@@ -32,6 +32,8 @@ const ELEM_RADIO_ARRIVAL = document.getElementById("arrival");
 const ELEM_RADIO_GERMAN = document.getElementById("german");
 const ELEM_RADIO_ENGLISH = document.getElementById("english");
 
+const ELEM_CHECKBOX_EQSTOPS = document.getElementById("eqStops");
+
 const ELEM_CHECKBOX_PRODUCTS_FILTER_0 = document.getElementById("products-filter-0");
 const ELEM_CHECKBOX_PRODUCTS_FILTER_1 = document.getElementById("products-filter-1");
 const ELEM_CHECKBOX_PRODUCTS_FILTER_2 = document.getElementById("products-filter-2");
@@ -95,12 +97,12 @@ let SLs = {
   // callback when fetch is successful
   showSuggestion: handleSuccessfulStationFetch,
 
-  // stored parameters 
+  // stored parameters
   inputStationSearch: null,
   selectStation: null,
   suggestionsList: null,
-  inputStationID: null
-}
+  inputStationID: null,
+};
 
 function selectListentry(selectedEntryIndex, suggestionsList, inputStationID) {
   for (let i = 0; i < ELEM_SUGGESTIONS_LIST[suggestionsList].length; i++) {
@@ -178,7 +180,7 @@ function searchStationFetch(inputStationSearch, selectStation, suggestionsList, 
       "?&js=true&";
 
     let scriptElt = document.createElement("script");
-    scriptElt.setAttribute("data-id", "scotty_jsonp");  
+    scriptElt.setAttribute("data-id", "scotty_jsonp");
     scriptElt.src = searchURL;
     scriptElt.onerror = () => {
       // "Not Found"
@@ -306,6 +308,10 @@ function generateURL() {
     urlParameterLanguage = "de";
   }
 
+  // eqStops
+  let urlParamEqStops = false;
+  if (ELEM_CHECKBOX_EQSTOPS.checked) urlParamEqStops = true;
+
   // Train selection
   let urlParamTrainSelection = "";
   for (let i = ELEM_CHECKBOX_PRODUCTS_FILTER_LIST.length - 1; i >= 0; i--) {
@@ -319,7 +325,7 @@ function generateURL() {
   const urlScotty =
     "https://fahrplan.oebb.at/bin/stboard.exe/" +
     urlParameterLanguage +
-    "?L=vs_scotty.vs_liveticker&start=yes&eqstops=true" +
+    "?L=vs_scotty.vs_liveticker&start=yes" +
     "&evaId=" +
     urlParamDepartureStation +
     "&dirInput=" +
@@ -332,6 +338,8 @@ function generateURL() {
     urlParamBoardType +
     "&tickerID=" +
     urlParamBoardType +
+    "&eqstops=" +
+    urlParamEqStops +
     "&additionalTime=" +
     urlParamAdditionalTime +
     "&productsFilter=" +
