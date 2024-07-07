@@ -12,10 +12,6 @@ body {
   font-size: var(--font-scale);
 }
 
-#div-mode2 {
-  /* display: none; */
-}
-
 input,
 textarea,
 select {
@@ -50,8 +46,10 @@ p {
 }
 
 .fieldset-products-filter input,
+.fieldset-styling input,
 .fieldset-board-type input,
-.fieldset-language input {
+.fieldset-language input,
+.fieldset-additional-settings input {
   transform: scale(1.5);
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -76,7 +74,25 @@ p {
   cursor: default;
 }
 
-.div-container {
+#container-mode1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr; */
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "div-inline div-inline div-inline"
+    "fieldset-departure fieldset-destination fieldset-url"
+    "fieldset-additional-time fieldset-products-filter fieldset-preview"
+    "fieldset-num-journeys fieldset-products-filter fieldset-preview"
+    "fieldset-board-type fieldset-products-filter fieldset-preview"
+    "fieldset-language fieldset-products-filter fieldset-preview"
+    "fieldset-additional-settings fieldset-products-filter fieldset-preview"
+    "fieldset-update-interval fieldset-styling fieldset-preview"
+    "fieldset-font-size fieldset-styling fieldset-preview";
+}
+
+#container-mode2 {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
   /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr; */
@@ -88,11 +104,19 @@ p {
     "fieldset-additional-time fieldset-products-filter fieldset-preview "
     "fieldset-num-journeys fieldset-products-filter fieldset-preview "
     "fieldset-board-type fieldset-products-filter fieldset-preview "
-    "fieldset-language fieldset-products-filter fieldset-preview ";
+    "fieldset-language fieldset-products-filter fieldset-preview "
+    "fieldset-additional-settings fieldset-products-filter fieldset-preview";
+}
 
-  /* max-width: 800px; */
-  /* margin-left: auto;
-  margin-right: auto; */
+#container-mode3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr; */
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "div-inline div-inline div-inline"
+    "fieldset-departure fieldset-board-type fieldset-url";
 }
 
 .div-inline {
@@ -125,8 +149,24 @@ p {
   grid-area: fieldset-language;
 }
 
+.fieldset-additional-settings {
+  grid-area: fieldset-additional-settings;
+}
+
 .fieldset-num-journeys {
   grid-area: fieldset-num-journeys;
+}
+
+.fieldset-update-interval {
+  grid-area: fieldset-update-interval;
+}
+
+.fieldset-font-size {
+  grid-area: fieldset-font-size;
+}
+
+.fieldset-styling {
+  grid-area: fieldset-styling;
 }
 
 .fieldset-url {
@@ -147,12 +187,7 @@ textarea {
   resize: none;
 }
 
-#input-departure-station-search,
-#input-destination-station-search,
-#select-departure-station,
-#select-destination-station,
-#input-additional-time,
-#input-number-of-journeys,
+.full-width,
 .div-id {
   width: 100%;
 }
@@ -185,7 +220,7 @@ iframe {
 .iframe-container {
   /* overflow: hidden; */
   width: 100%; /* Adjust based on your requirements */
-  height: 100%rem;
+  height: 100%;
 }
 
 .div-inline {
@@ -277,6 +312,11 @@ iframe + button:hover {
   opacity: 1;
 }
 
+.btn-back {
+  width: 32px;
+  height: 32px;
+}
+
 /* LOADING SCREEN */
 .lds-dual-ring,
 .lds-dual-ring:after {
@@ -316,10 +356,11 @@ iframe + button:hover {
   body {
     /* background-color: rgb(0, 0, 54); */
   }
-  .div-container {
+
+  #container-mode1 {
     grid-template-columns: 1fr 1fr;
     /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr 0.5fr 1.5fr; */
-    grid-template-rows: auto auto auto auto auto auto 10rem 30rem;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto 10rem 30rem;
 
     grid-template-areas:
       "div-inline div-inline"
@@ -328,8 +369,40 @@ iframe + button:hover {
       "fieldset-num-journeys fieldset-products-filter"
       "fieldset-board-type fieldset-products-filter"
       "fieldset-language fieldset-products-filter"
+      "fieldset-additional-settings fieldset-products-filter"
+      "fieldset-update-interval fieldset-styling"
+      "fieldset-font-size fieldset-styling"
       "fieldset-url fieldset-url"
       "fieldset-preview fieldset-preview";
+  }
+
+  #container-mode2 {
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr 0.5fr 1.5fr; */
+    grid-template-rows: auto auto auto auto auto auto auto 10rem 30rem;
+
+    grid-template-areas:
+      "div-inline div-inline"
+      "fieldset-departure fieldset-destination"
+      "fieldset-additional-time fieldset-products-filter"
+      "fieldset-num-journeys fieldset-products-filter"
+      "fieldset-board-type fieldset-products-filter"
+      "fieldset-language fieldset-products-filter"
+      "fieldset-additional-settings fieldset-products-filter"
+      "fieldset-url fieldset-url"
+      "fieldset-preview fieldset-preview";
+  }
+
+  #container-mode3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr; */
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "div-inline div-inline"
+      "fieldset-departure fieldset-board-type"
+      "fieldset-url fieldset-url";
   }
 }
 
@@ -340,10 +413,11 @@ iframe + button:hover {
   :root {
     --iframe-scale: 1.1;
   }
-  .div-container {
+
+  #container-mode1 {
     grid-template-columns: 1fr 1fr;
     /* grid-template-rows: 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr 1fr 0.7fr 1.7fr; */
-    grid-template-rows: auto auto auto auto auto auto auto 14rem 20rem;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto 14rem 20rem;
     grid-template-areas:
       "div-inline div-inline"
       "fieldset-departure fieldset-departure"
@@ -352,8 +426,41 @@ iframe + button:hover {
       "fieldset-num-journeys fieldset-products-filter"
       "fieldset-board-type fieldset-products-filter"
       "fieldset-language fieldset-products-filter"
+      "fieldset-additional-settings fieldset-products-filter"
+      "fieldset-update-interval fieldset-styling"
+      "fieldset-font-size fieldset-styling"
       "fieldset-url fieldset-url"
       "fieldset-preview fieldset-preview";
+  }
+
+  #container-mode2 {
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr 1fr 0.7fr 1.7fr; */
+    grid-template-rows: auto auto auto auto auto auto auto auto 14rem 20rem;
+    grid-template-areas:
+      "div-inline div-inline"
+      "fieldset-departure fieldset-departure"
+      "fieldset-destination fieldset-destination"
+      "fieldset-additional-time fieldset-products-filter"
+      "fieldset-num-journeys fieldset-products-filter"
+      "fieldset-board-type fieldset-products-filter"
+      "fieldset-language fieldset-products-filter"
+      "fieldset-additional-settings fieldset-products-filter"
+      "fieldset-url fieldset-url"
+      "fieldset-preview fieldset-preview";
+  }
+
+  #container-mode3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto 15rem;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "div-inline div-inline"
+      "fieldset-departure fieldset-departure"
+      "fieldset-board-type fieldset-board-type"
+      "fieldset-url fieldset-url";
   }
 
   textarea + button,
