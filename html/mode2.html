@@ -3,14 +3,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ÖBB Link Creator</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
     <!-- Mode 2 -->
-    <div id="container-mode1">
+    <div id="container-mode2">
       <!-- Top Bar -->
       <div class="div-inline">
-        <button onclick="window.location.href='./index.html'">Back</button>
+        <button onclick="window.location.href='../index.html'">Back</button>
         <!-- Github logo -->
         <a
           class="AppHeader-logo ml-2"
@@ -26,7 +26,6 @@
             ></path>
           </svg>
         </a>
-
         <!-- <span>Search Mode</span> -->
         <fieldset class="fieldset-search-mode">
           <legend>Search Mode</legend>
@@ -190,7 +189,7 @@
         </div>
       </fieldset>
 
-       <!-- Additional settings -->
+      <!-- Additional settings -->
       <fieldset class="fieldset-additional-settings">
         <legend>Additional Settings</legend>
         <div>
@@ -342,60 +341,6 @@
         </div>
       </fieldset>
 
-      <!-- Update interval -->
-      <fieldset class="fieldset-update-interval">
-        <legend>Update interval</legend>
-        <input
-          type="number"
-          inputmode="numeric"
-          id="input-update-interval"
-          class="full-width"
-          value="30"
-          min="5"
-          onchange="generateURL()"
-        />
-      </fieldset>
-
-      <!-- Font size -->
-      <fieldset class="fieldset-font-size">
-        <legend>Font size</legend>
-        <input type="text" inputmode="numeric" id="input-font-size" class="full-width" value="3vw" onchange="generateURL()"  />
-      </fieldset>
-
-      <!-- Styling -->
-      <fieldset class="fieldset-styling">
-        <legend>Styling</legend>
-        <div>
-          <label for="show-clock"
-            ><input type="checkbox" id="show-clock" name="show-clock" onchange="generateURL()" />Show clock</label
-          >
-        </div>
-        <div>
-          <label for="show-header"
-            ><input type="checkbox" id="show-header" name="show-header" onchange="generateURL()" checked />Show
-            header</label
-          >
-        </div>
-        <div>
-          <label for="show-line"
-            ><input type="checkbox" id="show-line" name="show-line" onchange="generateURL()" checked />Show line</label
-          >
-        </div>
-        <div>
-        <div>
-          <label for="show-direction"
-            ><input type="checkbox" id="show-direction" name="show-direction" onchange="generateURL()" checked />Show
-            direction</label
-          >
-        </div>
-        <div>
-          <label for="show-platform"
-            ><input type="checkbox" id="show-platform" name="show-platform" onchange="generateURL()" />Show
-            platform</label
-          >
-        </div>
-      </fieldset>
-
       <!-- Output -->
       <fieldset class="fieldset-preview">
         <legend>Preview</legend>
@@ -422,8 +367,8 @@
 
     <!-- <input type="button" value="bla" onclick="myMiniSearch()" /> -->
 
-    <script src="./StopPlaces.js"></script>
+    <script src="../javascript/StopPlaces.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js"></script>
-    <script src="./mode1.js"></script>
+    <script src="../javascript/mode2.js"></script>
   </body>
 </html>

@@ -10,6 +10,7 @@ body {
   background-color: var(--background-color);
   color: white;
   font-size: var(--font-scale);
+  height: auto;
 }
 
 input,
@@ -21,6 +22,7 @@ select {
 
 textarea,
 input,
+input::placeholder,
 button,
 label,
 select,

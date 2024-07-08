@@ -32,6 +32,8 @@ const ELEM_RADIO_ARRIVAL = document.getElementById("arrival");
 const ELEM_RADIO_GERMAN = document.getElementById("german");
 const ELEM_RADIO_ENGLISH = document.getElementById("english");
 
+const ELEM_CHECKBOX_EQSTOPS = document.getElementById("eqStops");
+
 const ELEM_CHECKBOX_PRODUCTS_FILTER_0 = document.getElementById("products-filter-0");
 const ELEM_CHECKBOX_PRODUCTS_FILTER_1 = document.getElementById("products-filter-1");
 const ELEM_CHECKBOX_PRODUCTS_FILTER_2 = document.getElementById("products-filter-2");
@@ -339,6 +341,9 @@ function generateURL() {
   let urlParamShowPlatform = false;
   if (ELEM_CHECKBOX_SHOW_PLATFORM.checked) urlParamShowPlatform = true;
 
+  let urlParamEqStops = false;
+  if (ELEM_CHECKBOX_EQSTOPS.checked) urlParamEqStops = true;
+
   const urlScotty =
     "https://dave2ooo.github.io/oebb-monitor-v2/?departure_station=" +
     urlParamDepartureStation +
@@ -365,7 +370,9 @@ function generateURL() {
     "&show_direction=" +
     urlParamShowDirection +
     "&show_platform=" +
-    urlParamShowPlatform;
+    urlParamShowPlatform +
+    "&eq_stops=" +
+    urlParamEqStops;
 
   ELEM_INPUT_URL.value = urlScotty;
   ELEM_IFRAME_PREVIEW.src = urlScotty;
