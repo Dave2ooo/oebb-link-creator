@@ -1,8 +1,10 @@
 :root {
   --background-color: #2b2e33;
   --input-background-color: #1e1e1e;
-  --font-scale: 1.1rem;
-  --font-scale-mobile: 0.8rem;
+  --font-scale-first-column: 1rem;
+  --font-scale-symbols: 2rem;
+  --font-scale-first-column-mobile: 1rem;
+  --font-scale-symbols-moile: 1.5rem;
 }
 
 body {
@@ -55,7 +57,11 @@ body {
 }
 
 td {
-  font-size: var(--font-scale);
+  font-size: var(--font-scale-symbols);
+}
+
+td:first-child {
+  font-size: var(--font-scale-first-column);
 }
 
 #comparison-table-mobile {
@@ -74,7 +80,11 @@ td {
 }
 
 @media (max-width: 40em) {
-  .comparison-table td {
-    font-size: var(--font-scale-mobile);
+  td {
+    font-size: var(--font-scale-symbols-moile);
+  }
+
+  td:first-child {
+    font-size: var(--font-scale-first-column-mobile);
   }
 }
