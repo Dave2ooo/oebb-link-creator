@@ -190,7 +190,7 @@
         </div>
       </fieldset>
 
-       <!-- Additional settings -->
+      <!-- Additional settings -->
       <fieldset class="fieldset-additional-settings">
         <legend>Additional Settings</legend>
         <div>
@@ -357,10 +357,17 @@
       </fieldset>
 
       <!-- Font size -->
-      <fieldset class="fieldset-font-size">
+      <!-- <fieldset class="fieldset-font-size">
         <legend>Font size</legend>
-        <input type="text" inputmode="numeric" id="input-font-size" class="full-width" value="3vw" onchange="generateURL()"  />
-      </fieldset>
+        <input
+          type="text"
+          inputmode="numeric"
+          id="input-font-size"
+          class="full-width"
+          value="3vw"
+          onchange="generateURL()"
+        />
+      </fieldset> -->
 
       <!-- Styling -->
       <fieldset class="fieldset-styling">
@@ -382,7 +389,6 @@
           >
         </div>
         <div>
-        <div>
           <label for="show-direction"
             ><input type="checkbox" id="show-direction" name="show-direction" onchange="generateURL()" checked />Show
             direction</label
@@ -393,6 +399,39 @@
             ><input type="checkbox" id="show-platform" name="show-platform" onchange="generateURL()" />Show
             platform</label
           >
+        </div>
+        <div>
+          <label for="checkbox-background-color"
+            ><input
+              type="checkbox"
+              id="checkbox-background-color"
+              name="checkbox-background-color"
+              onchange="generateURL()" />Custom background color
+            <input type="color" id="input-background-color" name="input-background-color" onchange="generateURL()"
+          /></label>
+        </div>
+        <div>
+          <label for="checkbox-text-color"
+            ><input
+              type="checkbox"
+              id="checkbox-text-color"
+              name="checkbox-text-color"
+              onchange="generateURL()" />Custom text color
+            <input type="color" id="input-text-color" name="input-text-color" onchange="generateURL()"
+          /></label>
+        </div>
+        <div>
+          <label for="checkbox-text-size"
+            ><input type="checkbox" id="checkbox-text-size" name="checkbox-text-size" onchange="generateURL()" />Custom
+            text size
+            <input
+              type="text"
+              class="input-text-not-full-width"
+              inputmode="text"
+              id="input-text-size"
+              value="3vw"
+              onchange="generateURL()"
+          /></label>
         </div>
       </fieldset>
 

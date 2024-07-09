@@ -72,6 +72,12 @@ const ELEM_CHECKBOX_SHOW_HEADER = document.getElementById("show-header");
 const ELEM_CHECKBOX_SHOW_LINE = document.getElementById("show-line");
 const ELEM_CHECKBOX_SHOW_DIRECTION = document.getElementById("show-direction");
 const ELEM_CHECKBOX_SHOW_PLATFORM = document.getElementById("show-platform");
+const ELEM_CHECKBOX_BACKGROUND_COLOR = document.getElementById("checkbox-background-color");
+const ELEM_INPUT_BACKGROUND_COLOR = document.getElementById("input-background-color");
+const ELEM_CHECKBOX_TEXT_COLOR = document.getElementById("checkbox-text-color");
+const ELEM_INPUT_TEXT_COLOR = document.getElementById("input-text-color");
+const ELEM_CHECKBOX_TEXT_SIZE = document.getElementById("checkbox-text-size");
+const ELEM_INPUT_TEXT_SIZE = document.getElementById("input-text-size");
 
 const ELEM_INPUT_URL = document.getElementById("input-url");
 const ELEM_IFRAME_PREVIEW = document.getElementById("iframe-preview");
@@ -318,9 +324,6 @@ function generateURL() {
   // Update interval
   const urlParamUpdateInterval = ELEM_INPUT_UPDATE_INTERVAL.value;
 
-  // Font size
-  const urlParamFontSize = ELEM_INPUT_FONT_SIZE.value;
-
   // Show Clock
   let urlParamShowClock = false;
   if (ELEM_CHECKBOX_SHOW_CLOCK.checked) urlParamShowClock = true;
@@ -341,6 +344,18 @@ function generateURL() {
   let urlParamShowPlatform = false;
   if (ELEM_CHECKBOX_SHOW_PLATFORM.checked) urlParamShowPlatform = true;
 
+  // Background Color
+  let urlParamBackgroundColor = "";
+  if (ELEM_CHECKBOX_BACKGROUND_COLOR.checked) urlParamBackgroundColor = ELEM_INPUT_BACKGROUND_COLOR.value.replace("#", "");
+
+  // Text Color
+  let urlParamTextColor = "";
+  if (ELEM_CHECKBOX_TEXT_COLOR.checked) urlParamTextColor = ELEM_INPUT_TEXT_COLOR.value.replace("#", "");
+
+  // Text Size
+  let urlParamTextSize = "";
+  if (ELEM_CHECKBOX_TEXT_SIZE.checked) urlParamTextSize = ELEM_INPUT_TEXT_SIZE.value;
+
   let urlParamEqStops = false;
   if (ELEM_CHECKBOX_EQSTOPS.checked) urlParamEqStops = true;
 
@@ -359,8 +374,12 @@ function generateURL() {
     urlParamTrainSelection +
     "&update_interval=" +
     urlParamUpdateInterval +
+    "&font_color=" +
+    urlParamTextColor +
+    "&background_color=" +
+    urlParamBackgroundColor +
     "&font_size=" +
-    urlParamFontSize +
+    urlParamTextSize +
     "&show_clock=" +
     urlParamShowClock +
     "&show_header=" +
