@@ -47,15 +47,26 @@ p {
   margin: 0;
 }
 
-.fieldset-products-filter input,
-.fieldset-styling input,
-.fieldset-board-type input,
-.fieldset-language input,
-.fieldset-additional-settings input {
+input[type="checkbox"],
+input[type="radio"] {
   transform: scale(1.5);
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin-right: 0.7rem;
+}
+
+input[type="color"] {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.7rem;
+}
+
+.input-text-not-full-width {
+}
+
+.inline {
+  display: flex;
+  align-items: baseline;
 }
 
 .fieldset-search-mode {
