@@ -56,12 +56,13 @@ input[type="radio"] {
 }
 
 input[type="color"] {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  /* margin-top: 0.5rem;
+  margin-bottom: 0.5rem; */
   margin-right: 0.7rem;
 }
 
 .input-text-not-full-width {
+  width: 10ch;
 }
 
 .inline {
@@ -100,7 +101,7 @@ input[type="color"] {
     "fieldset-num-journeys fieldset-products-filter fieldset-preview"
     "fieldset-board-type fieldset-products-filter fieldset-preview"
     "fieldset-language fieldset-products-filter fieldset-preview"
-    "fieldset-additional-settings fieldset-products-filter fieldset-preview"
+    "fieldset-additional-settings  fieldset-styling fieldset-preview"
     "fieldset-update-interval fieldset-styling fieldset-preview"
     "fieldset-font-size fieldset-styling fieldset-preview";
 }
@@ -382,7 +383,7 @@ iframe + button:hover {
       "fieldset-num-journeys fieldset-products-filter"
       "fieldset-board-type fieldset-products-filter"
       "fieldset-language fieldset-products-filter"
-      "fieldset-additional-settings fieldset-products-filter"
+      "fieldset-additional-settings  fieldset-styling"
       "fieldset-update-interval fieldset-styling"
       "fieldset-font-size fieldset-styling"
       "fieldset-url fieldset-url"
@@ -440,8 +441,8 @@ iframe + button:hover {
       "fieldset-board-type fieldset-products-filter"
       "fieldset-language fieldset-products-filter"
       "fieldset-additional-settings fieldset-products-filter"
-      "fieldset-update-interval fieldset-styling"
-      "fieldset-font-size fieldset-styling"
+      "fieldset-update-interval fieldset-products-filter"
+      "fieldset-styling fieldset-styling"
       "fieldset-url fieldset-url"
       "fieldset-preview fieldset-preview";
   }
