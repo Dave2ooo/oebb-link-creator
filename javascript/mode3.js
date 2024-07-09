@@ -114,7 +114,8 @@ function generateURL() {
   https://meine.oebb.at/webdisplay/?stationId=Bg&contentType=departure&staticLayout=true
 */
   // Departure Station
-  const urlParamDepartureStation = ELEM_INPUT_DEPARTURE_STATION_ID.value.replace(" ", "");
+  let urlParamDepartureStation = ELEM_INPUT_DEPARTURE_STATION_ID.value.replace(" ", "");
+  urlParamDepartureStation = urlParamDepartureStation.replace(" ", "%20");
 
   // Departure - Arrival
   let urlParamBoardType;
