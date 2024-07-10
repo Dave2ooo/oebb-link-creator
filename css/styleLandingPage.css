@@ -16,7 +16,7 @@ body {
 
 .comparison-table {
   border-collapse: collapse;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 .comparison-table th,
@@ -66,6 +66,10 @@ td:first-child {
 
 #comparison-table-mobile {
   display: none;
+}
+
+a {
+  color: rgb(141, 255, 184);
 }
 
 /* MEDIA QUERIES */
