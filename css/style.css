@@ -101,11 +101,12 @@ input[type="color"] {
     "fieldset-additional-time fieldset-products-filter fieldset-preview"
     "fieldset-num-journeys fieldset-products-filter fieldset-preview"
     "fieldset-board-type fieldset-products-filter fieldset-preview"
-    "fieldset-language fieldset-products-filter fieldset-preview"
-    "fieldset-additional-settings  fieldset-styling fieldset-preview"
-    "fieldset-update-interval fieldset-styling fieldset-preview"
-    "fieldset-font-size fieldset-styling fieldset-preview";
+    "fieldset-additional-settings fieldset-products-filter fieldset-preview"
+    "fieldset-update-interval fieldset-products-filter fieldset-preview"
+    "fieldset-styling fieldset-styling fieldset-preview";
 }
+
+/* fieldset-styling */
 
 #container-mode2 {
   display: grid;
@@ -178,10 +179,6 @@ input[type="color"] {
 
 .fieldset-update-interval {
   grid-area: fieldset-update-interval;
-}
-
-.fieldset-font-size {
-  grid-area: fieldset-font-size;
 }
 
 .fieldset-styling {
@@ -388,9 +385,9 @@ iframe + button:hover {
       "fieldset-num-journeys fieldset-products-filter"
       "fieldset-board-type fieldset-products-filter"
       "fieldset-language fieldset-products-filter"
-      "fieldset-additional-settings  fieldset-styling"
-      "fieldset-update-interval fieldset-styling"
-      "fieldset-font-size fieldset-styling"
+      "fieldset-additional-settings  fieldset-products-filter"
+      "fieldset-update-interval fieldset-products-filter"
+      "fieldset-styling fieldset-styling"
       "fieldset-url fieldset-url"
       "fieldset-preview fieldset-preview";
   }
@@ -436,7 +433,7 @@ iframe + button:hover {
   #container-mode1 {
     grid-template-columns: 1fr 1fr;
     /* grid-template-rows: 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr 1fr 0.7fr 1.7fr; */
-    grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto 14rem 20rem;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto 14rem 30rem;
     grid-template-areas:
       "div-inline div-inline"
       "fieldset-search-mode fieldset-search-mode"
@@ -445,7 +442,6 @@ iframe + button:hover {
       "fieldset-additional-time fieldset-products-filter"
       "fieldset-num-journeys fieldset-products-filter"
       "fieldset-board-type fieldset-products-filter"
-      "fieldset-language fieldset-products-filter"
       "fieldset-additional-settings fieldset-products-filter"
       "fieldset-update-interval fieldset-products-filter"
       "fieldset-styling fieldset-styling"
