@@ -92,6 +92,8 @@ let outputString;
 let busy = false;
 let queue = false;
 
+let fetchTimeout;
+
 const miniSearch = new MiniSearch({
   fields: ["Name"], // fields to index for full-text search
   storeFields: ["Name", "Value"], // fields to return with search results
@@ -167,6 +169,14 @@ function searchStationLocal(inputStationSearch, selectStation, suggestionsList, 
 }
 
 function searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID) {
+  clearTimeout(fetchTimeout);
+
+  fetchTimeout = setTimeout(() => {
+    searchStationFetchDelayed(inputStationSearch, selectStation, suggestionsList, inputStationID);
+  }, 500);
+}
+
+function searchStationFetchDelayed(inputStationSearch, selectStation, suggestionsList, inputStationID) {
   const searchText = inputStationSearch.value;
   if (searchText.length < 2) return;
 
@@ -299,12 +309,12 @@ function generateURL() {
   }
 
   // Language
-  let urlParameterLanguage;
-  if (ELEM_RADIO_ENGLISH.checked) {
-    urlParameterLanguage = "en";
-  } else {
-    urlParameterLanguage = "de";
-  }
+  // let urlParameterLanguage;
+  // if (ELEM_RADIO_ENGLISH.checked) {
+  //   urlParameterLanguage = "en";
+  // } else {
+  //   urlParameterLanguage = "de";
+  // }
 
   // Train selection
   let urlParamTrainSelection = "";
@@ -346,7 +356,8 @@ function generateURL() {
 
   // Background Color
   let urlParamBackgroundColor = "";
-  if (ELEM_CHECKBOX_BACKGROUND_COLOR.checked) urlParamBackgroundColor = ELEM_INPUT_BACKGROUND_COLOR.value.replace("#", "");
+  if (ELEM_CHECKBOX_BACKGROUND_COLOR.checked)
+    urlParamBackgroundColor = ELEM_INPUT_BACKGROUND_COLOR.value.replace("#", "");
 
   // Text Color
   let urlParamTextColor = "";

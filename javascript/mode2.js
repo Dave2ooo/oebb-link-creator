@@ -77,6 +77,8 @@ let outputString;
 let busy = false;
 let queue = false;
 
+let fetchTimeout;
+
 const miniSearch = new MiniSearch({
   fields: ["Name"], // fields to index for full-text search
   storeFields: ["Name", "Value"], // fields to return with search results
@@ -152,6 +154,14 @@ function searchStationLocal(inputStationSearch, selectStation, suggestionsList, 
 }
 
 function searchStationFetch(inputStationSearch, selectStation, suggestionsList, inputStationID) {
+  clearTimeout(fetchTimeout);
+
+  fetchTimeout = setTimeout(() => {
+    searchStationFetchDelayed(inputStationSearch, selectStation, suggestionsList, inputStationID);
+  }, 500);
+}
+
+function searchStationFetchDelayed(inputStationSearch, selectStation, suggestionsList, inputStationID) {
   const searchText = inputStationSearch.value;
   if (searchText.length < 2) return;
 
