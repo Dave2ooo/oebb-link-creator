@@ -1,4 +1,4 @@
-Visit the Link Creator here: [ÖBB Link Creator](https://dave2ooo.github.io/oebb-link-creator/html/index.html)
+Visit the Link Creator here: [ÖBB Link Creator](https://dave2ooo.github.io/oebb-link-creator)
 
 # Introduction
 This webpage helps you to create a URL that shows the departure times of your public transformation station.
