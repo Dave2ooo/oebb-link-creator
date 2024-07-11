@@ -12,6 +12,7 @@ body {
   background-color: var(--background-color);
   color: white;
   font-size: var(--font-scale);
+  height: auto;
 }
 
 .comparison-table {
