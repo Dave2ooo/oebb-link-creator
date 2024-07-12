@@ -367,8 +367,8 @@ function generateURL() {
   let urlParamTextSize = "";
   if (ELEM_CHECKBOX_TEXT_SIZE.checked) urlParamTextSize = ELEM_INPUT_TEXT_SIZE.value;
 
-  let urlParamEqStops = false;
-  if (ELEM_CHECKBOX_EQSTOPS.checked) urlParamEqStops = true;
+  // let urlParamEqStops = false;
+  // if (ELEM_CHECKBOX_EQSTOPS.checked) urlParamEqStops = true;
 
   const urlScotty =
     "https://dave2ooo.github.io/oebb-monitor-v2/?departure_station=" +
@@ -400,9 +400,9 @@ function generateURL() {
     "&show_direction=" +
     urlParamShowDirection +
     "&show_platform=" +
-    urlParamShowPlatform +
-    "&eq_stops=" +
-    urlParamEqStops;
+    urlParamShowPlatform;
+  // "&eq_stops=" +
+  // urlParamEqStops;
 
   ELEM_INPUT_URL.value = urlScotty;
   ELEM_IFRAME_PREVIEW.src = urlScotty;
