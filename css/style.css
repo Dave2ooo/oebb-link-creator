@@ -1,7 +1,7 @@
 :root {
   --background-color: #2b2e33;
   --input-background-color: #1e1e1e;
-  --iframe-scale: 1.4;
+  --iframe-scale: 1.6;
   --font-scale: 1.1rem;
 }
 
@@ -92,7 +92,6 @@ input[type="color"] {
 #container-mode1 {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr; */
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -111,7 +110,6 @@ input[type="color"] {
 #container-mode2 {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr; */
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -127,12 +125,13 @@ input[type="color"] {
 #container-mode3 {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr; */
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
     "div-inline div-inline div-inline"
-    "fieldset-departure fieldset-board-type fieldset-url";
+    "fieldset-departure fieldset-board-type fieldset-url"
+    "fieldset-departure fieldset-page-number fieldset-url"
+    "fieldset-preview fieldset-preview fieldset-preview";
 }
 
 .div-inline {
@@ -193,6 +192,10 @@ input[type="color"] {
   grid-area: fieldset-preview;
 }
 
+.fieldset-page-number {
+  grid-area: fieldset-page-number;
+}
+
 select {
   margin-bottom: 10px;
 }
@@ -226,13 +229,24 @@ textarea {
 }
 
 iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  overflow: hidden;
+}
+
+.iframe-ratio {
+  height: auto;
+  aspect-ratio: 16/9;
+}
+
+.iframe-scale {
   transform: scale(var(--iframe-scale));
   transform-origin: 0 0;
   width: calc(1 / var(--iframe-scale) * 100%);
   height: calc(1 / var(--iframe-scale) * 100%);
-  border: none;
-  overflow: hidden;
 }
+
 .iframe-container {
   /* overflow: hidden; */
   width: 100%; /* Adjust based on your requirements */
@@ -412,13 +426,15 @@ iframe + button:hover {
   #container-mode3 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* grid-template-rows: 0.1fr 1fr 0.1fr 0.1fr 0.1fr 1fr; */
+    grid-template-rows: auto auto auto 8rem auto;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
       "div-inline div-inline"
       "fieldset-departure fieldset-board-type"
-      "fieldset-url fieldset-url";
+      "fieldset-departure fieldset-page-number"
+      "fieldset-url fieldset-url"
+      "fieldset-preview fieldset-preview";
   }
 }
 
@@ -452,7 +468,7 @@ iframe + button:hover {
   #container-mode2 {
     grid-template-columns: 1fr 1fr;
     /* grid-template-rows: 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr 1fr 0.7fr 1.7fr; */
-    grid-template-rows: auto auto auto auto auto auto auto auto 14rem 20rem;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto 14rem 20rem;
     grid-template-areas:
       "div-inline div-inline"
       "fieldset-search-mode fieldset-search-mode"
@@ -470,14 +486,15 @@ iframe + button:hover {
   #container-mode3 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto 15rem;
+    grid-template-rows: auto auto auto 10rem auto;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
       "div-inline div-inline"
       "fieldset-departure fieldset-departure"
-      "fieldset-board-type fieldset-board-type"
-      "fieldset-url fieldset-url";
+      "fieldset-board-type fieldset-page-number"
+      "fieldset-url fieldset-url"
+      "fieldset-preview fieldset-preview";
   }
 
   textarea + button,
