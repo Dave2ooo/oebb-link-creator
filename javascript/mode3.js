@@ -11,6 +11,8 @@ let ELEM_DESTINATION_SUGGESTIONS_LIST = [];
 
 const ELEM_RADIO_DEPARTURE = document.getElementById("departure");
 const ELEM_RADIO_ARRIVAL = document.getElementById("arrival");
+const ELEM_INPUT_PAGE_NUMBER = document.getElementById("input-page-number");
+// const ELEM_CHECKBOX_SHOW_INCIDENTS = document.getElementById("show-incidents");
 
 let ELEM_SUGGESTIONS_LIST = [ELEM_DEPARTURE_SUGGESTIONS_LIST, ELEM_DESTINATION_SUGGESTIONS_LIST];
 
@@ -31,7 +33,8 @@ const miniSearch = new MiniSearch({
   fields: ["Name"], // fields to index for full-text search
   storeFields: ["Name", "Value"], // fields to return with search results
 });
-miniSearch.addAll(Verkehrsstationen);
+// miniSearch.addAll(Verkehrsstationen);
+miniSearch.addAll(StopPlaces);
 
 function selectListentry(selectedEntryIndex, suggestionsList, inputStationID) {
   for (let i = 0; i < ELEM_SUGGESTIONS_LIST[suggestionsList].length; i++) {
@@ -125,22 +128,39 @@ function generateURL() {
     urlParamBoardType = "arrival";
   }
 
-  const urlScotty =
+  const urlParamPageNumber = ELEM_INPUT_PAGE_NUMBER.value;
+
+  // let urlParamIgnoreIncidents = "true";
+  // if (ELEM_CHECKBOX_SHOW_INCIDENTS.checked) urlParamIgnoreIncidents = "false";
+
+  /*  const urlScotty =
     "https://meine.oebb.at/webdisplay/?stationId=" +
     urlParamDepartureStation +
     "&contentType=" +
     urlParamBoardType +
-    "&staticLayout=true";
+    "&staticLayout=true" +
+    "&page=" +
+    urlParamPageNumber;
+    */
+
+  const urlScotty =
+    "https://meine.oebb.at/abfahrtankunft/" +
+    urlParamBoardType +
+    "?static=true&ignoreIncident=true" +
+    "&evaNr=" +
+    urlParamDepartureStation +
+    "&page=" +
+    urlParamPageNumber;
 
   ELEM_INPUT_URL.value = urlScotty;
-  //   ELEM_IFRAME_PREVIEW.src = urlScotty;
-  //   showLoadingScreen();
+  ELEM_IFRAME_PREVIEW.src = urlScotty;
+  showLoadingScreen();
 }
 
-// function refreshIframe() {
-//   ELEM_IFRAME_PREVIEW.src = ELEM_IFRAME_PREVIEW.src;
-//   showLoadingScreen();
-// }
+function refreshIframe() {
+  ELEM_IFRAME_PREVIEW.src = ELEM_IFRAME_PREVIEW.src;
+  showLoadingScreen();
+}
 
 async function copyURLToClipboard() {
   try {
@@ -165,14 +185,14 @@ function openInNewTab() {
 //   generateURL();
 // }
 
-// function showLoadingScreen() {
-//   // console.log("showLoadingScreen");
-//   // ELEM_LOADING_SPINNER.style.display = "block";
-//   ELEM_LOADING_SPINNER.classList.remove("display-none");
-// }
+function showLoadingScreen() {
+  // console.log("showLoadingScreen");
+  // ELEM_LOADING_SPINNER.style.display = "block";
+  ELEM_LOADING_SPINNER.classList.remove("display-none");
+}
 
-// function hideLoadingScreen() {
-//   // console.log("hideLoadingScreen");
-//   // ELEM_LOADING_SPINNER.style.display = "none";
-//   ELEM_LOADING_SPINNER.classList.add("display-none");
-// }
+function hideLoadingScreen() {
+  // console.log("hideLoadingScreen");
+  // ELEM_LOADING_SPINNER.style.display = "none";
+  ELEM_LOADING_SPINNER.classList.add("display-none");
+}
