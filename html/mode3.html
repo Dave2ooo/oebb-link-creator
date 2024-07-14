@@ -82,16 +82,40 @@
         </div>
       </fieldset>
 
+      <!-- Page number -->
+      <fieldset class="fieldset-page-number">
+        <legend>Page number</legend>
+        <input
+          type="number"
+          inputmode="numeric"
+          id="input-page-number"
+          class="full-width"
+          value="1"
+          min="1"
+          onchange="generateURL()"
+        />
+      </fieldset>
+
+      <!-- Additional Settings -->
+      <!-- <fieldset class="fieldset-additional-settings">
+        <legend>Additioal settings</legend>
+        <div>
+          <label for="show-incidents"
+            ><input type="checkbox" id="show-incidents" name="show-incidents" onchange="generateURL()" checked />Show
+            incidents</label
+          >
+        </div>
+      </fieldset> -->
+
       <!-- Output -->
-      <!-- 
-      <fieldset class="fieldset-preview">
+            <fieldset class="fieldset-preview">
         <legend>Preview</legend>
         <div class="iframe-container">
-          <iframe src="" frameborder="0" id="iframe-preview" onload="hideLoadingScreen()"></iframe>
+          <iframe src="" frameborder="0" id="iframe-preview" class="iframe-ratio" onload="hideLoadingScreen()"></iframe>
           <button onclick="refreshIframe()">Refresh</button>
           <div class="lds-dual-ring display-none"></div>
         </div>
-      </fieldset> -->
+      </fieldset>
 
       <fieldset class="fieldset-url">
         <legend>URL</legend>
@@ -100,14 +124,15 @@
         <!-- <a id="anchor-url" href="" target="_blank" rel="noopener noreferrer">Open</a> -->
         <button onclick="copyURLToClipboard()">Copy</button>
 
-        <button onclick="openInNewTab()">Open in new tab</button>
+        <!-- <button onclick="openInNewTab()">Open in new tab</button> -->
         <!-- <pre>
         <code id="code-url"></code>
         <button onclick="copyURLToClipboard()" >Copy</button>
         </pre> -->
       </fieldset>
     </div>
-    <script src="../javascript/Verkehrsstationen.js"></script>
+    <!-- <script src="../javascript/Verkehrsstationen.js"></script> -->
+    <script src="../javascript/StopPlaces.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js"></script>
     <script src="../javascript/mode3.js"></script>
   </body>
